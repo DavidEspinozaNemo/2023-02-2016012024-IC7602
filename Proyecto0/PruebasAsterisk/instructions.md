@@ -29,7 +29,7 @@ contrib/scripts/install_prereq install
 *) Se debe ver asi:
 
 configure: Menuselect build configuration successfully completed
-
+.
                .$$$$$$$$$$$$$$$=..
             .$7$7..          .7$$7:.
           .$$:.                 ,$7.7
