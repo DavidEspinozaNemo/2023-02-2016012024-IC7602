@@ -153,41 +153,42 @@ terraform {
 }
 
 provider "oci" {
-  tenancy_ocid         = "TU_TENANCY_OCID"
-  user_ocid            = "TU_USER_OCID"
-  fingerprint         = "TU_FINGERPRINT"
-  private_key_path    = "RUTA_A_TU_CLAVE_PRIVADA"
-  region              = "TU_REGION"
+  tenancy_ocid         = "${var.tenancy_ocid}"
+  user_ocid            = "${var.user_ocid}"
+  fingerprint          = "${var.fingerprint}"
+  private_key_path     = "${var.private_key_path}"
+  region               = "${var.region}"
 }
 
 # Main VCN
 resource "oci_core_virtual_network" "main_vcn" {
-  cidr_block = "192.168.0.0/16"
-
-  display_name = "Main VCN"
+  
+  compartment_id = "${var.compartment_ocid}"
+  cidr_block     = "192.168.0.0/16"
+  display_name   = "Main VCN"
 }
 
 # Public subnet
 resource "oci_core_subnet" "public_subnet" {
-  cidr_block     = "192.168.1.0/24"
-  compartment_id = "TU_OCID_DE_COMPARTIMENTO"
-  display_name  = "public-subnet"
-  vcn_id         = oci_core_virtual_network.main_vcn.id
-  availability_domain = "TU_DOMINIO_DE_DISPONIBILIDAD"
+  cidr_block      = "192.168.1.0/24"
+  compartment_id  = "${var.compartment_ocid}"
+  display_name    = "public-subnet"
+  vcn_id          = oci_core_virtual_network.main_vcn.id
+  availability_domain = "${var.availability_domain}"
 }
 
 # Private subnet
 resource "oci_core_subnet" "private_subnet" {
   cidr_block     = "192.168.0.0/24"
-  compartment_id = "TU_OCID_DE_COMPARTIMENTO"
+  compartment_id = "${var.compartment_ocid}"
   display_name  = "private-subnet"
   vcn_id         = oci_core_virtual_network.main_vcn.id
-  availability_domain = "TU_DOMINIO_DE_DISPONIBILIDAD"
+  availability_domain = "${var.availability_domain}"
 }
 
 # Security List for Security Group (equivalent to Security Group in AWS)
 resource "oci_core_security_list" "security_list" {
-  compartment_id = "TU_OCID_DE_COMPARTIMENTO"
+  compartment_id = ${image_ocid}
   display_name  = "main_security_group"
 
   egress_security_rules {
@@ -211,15 +212,16 @@ resource "oci_core_security_list" "security_list" {
 
 # Compute instance in Public Subnet
 resource "oci_core_instance" "public_instance" {
-  availability_domain = "TU_DOMINIO_DE_DISPONIBILIDAD"
-  compartment_id     = "TU_OCID_DE_COMPARTIMENTO"
-  shape              = "VM.Standard.E2.1.Micro"  # Choose an appropriate shape
+  availability_domain = "${var.availability_domain}"
+  compartment_id     = "${var.user_ocid}"
+  shape              = "${var.shape}"
+                        #   "VM.Standard.E2.1.Micro"  # Choose an appropriate shape
   display_name       = "PublicInstance"
-  image_id           = "ocid1.image.oc1.region.YOUR_IMAGE_OCID"
+  image_id           = "ocid1.image.oc1.region.${image_ocid}"
   subnet_id          = oci_core_subnet.public_subnet.id
   source_details {
     source_type = "image"
-    source_id   = "ocid1.image.oc1.region.YOUR_IMAGE_OCID"
+    source_id   = "ocid1.image.oc1.region.${image_ocid}"
   }
   create_vnic_details {
     subnet_id = oci_core_subnet.public_subnet.id
@@ -228,15 +230,16 @@ resource "oci_core_instance" "public_instance" {
 
 # Compute instance in Private Subnet
 resource "oci_core_instance" "private_instance" {
-  availability_domain = "TU_DOMINIO_DE_DISPONIBILIDAD"
-  compartment_id     = "TU_OCID_DE_COMPARTIMENTO"
-  shape              = "VM.Standard.E2.1.Micro"  # Choose an appropriate shape
+  availability_domain = "${var.availability_domain}"
+  compartment_id      = "${var.user_ocid}"
+  shape               = "${var.shape}"
+                        # "VM.Standard.E2.1.Micro"  # Choose an appropriate shape
   display_name       = "PrivateInstance"
-  image_id           = "ocid1.image.oc1.region.YOUR_IMAGE_OCID"
+  image_id           = "ocid1.image.oc1.region.${image_ocid}"
   subnet_id          = oci_core_subnet.private_subnet.id
   source_details {
     source_type = "image"
-    source_id   = "ocid1.image.oc1.region.YOUR_IMAGE_OCID"
+    source_id   = "ocid1.image.oc1.region.${image_ocid}"
   }
   create_vnic_details {
     subnet_id = oci_core_subnet.private_subnet.id
@@ -245,7 +248,7 @@ resource "oci_core_instance" "private_instance" {
 
 # SSH Key for Instances
 resource "oci_identity_ssh_key" "main_auth" {
-  compartment_id = "TU_OCID_DE_COMPARTIMENTO"
+  compartment_id = "${var.user_ocid}"
   key           = file("~/.ssh/mainkey.pub")
   name          = "mainkey"
 }

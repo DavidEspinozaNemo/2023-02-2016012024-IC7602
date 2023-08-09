@@ -16,15 +16,16 @@
 
 # ALTERNATIVO PARA ORACLE
 provider "oci" {
-  tenancy_ocid         = "YOUR_TENANCY_OCID"
-  user_ocid            = "YOUR_USER_OCID"
-  fingerprint         = "YOUR_FINGERPRINT"
-  private_key_path    = "YOUR_PRIVATE_KEY_PATH"
-  region              = "YOUR_REGION"
+  tenancy_ocid         = "${var.tenancy_ocid}"
+  user_ocid            = "${var.user_ocid}"
+  fingerprint          = "${var.fingerprint}"
+  private_key_path     = "${var.private_key_path}"
+  private_key_password = "${var.private_key_password}
+  region               = "${var.region}"
 }
 
 data "oci_core_images" "ubuntu_images" {
-  compartment_id = "YOUR_COMPARTMENT_OCID"
+  compartment_id = "${var.compartment_ocid}"
 
   # Filter for Oracle Linux images
   filter {
@@ -34,14 +35,16 @@ data "oci_core_images" "ubuntu_images" {
 }
 
 resource "oci_core_instance" "example_instance" {
-  availability_domain = "YOUR_AVAILABILITY_DOMAIN"
-  compartment_id     = "YOUR_COMPARTMENT_OCID"
-  shape              = "YOUR_INSTANCE_SHAPE"
-  subnet_id          = "YOUR_SUBNET_OCID"
-  display_name       = "MyInstance"
+  availability_domain = "${var.availability_domain}"
+  compartment_id      = "${var.compartment_ocid}"
+  shape               = "${var.shape}"
+  subnet_id           = oci_core_subnet.public_subnet.id
+  subnet_id           = oci_core_subnet.private_subnet.id
+  display_name        = "MainOCI"
 
   source_details {
     source_type = "image"
+    #"${image_ocid}"
     source_id   = data.oci_core_images.ubuntu_images.images[0].id
   }
 

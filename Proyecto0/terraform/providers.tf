@@ -24,11 +24,11 @@ terraform {
 
 # Configure the OCI Provider
 provider "oci" {
-  tenancy_ocid         = "TU_TENANCY_OCID"
-  user_ocid            = "TU_USER_OCID"
-  fingerprint         = "TU_FINGERPRINT"
-  private_key_path    = "RUTA_A_TU_CLAVE_PRIVADA"
-  region              = "TU_REGION"
+  tenancy_ocid        = "${var.tenancy_ocid}"
+  user_ocid           = "${var.user_ocid}"
+  fingerprint         = "${var.fingerprint}"
+  private_key_path    = "${var.private_key_path}"
+  region              = "${var.region}"
 }
 
 # Resto de tu configuración
