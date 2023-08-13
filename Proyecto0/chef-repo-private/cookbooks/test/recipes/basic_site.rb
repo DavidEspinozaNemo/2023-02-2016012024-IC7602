@@ -19,7 +19,7 @@ directory app_dir do
 end
 
 file "#{app_dir}/index.html" do
-  content 'Hello World'
+  content 'Server 2'
   owner   lazy { default_apache_user }
   group   lazy { default_apache_group }
 end
