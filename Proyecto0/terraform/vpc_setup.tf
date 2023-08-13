@@ -54,7 +54,7 @@ resource "aws_route_table_association" "public_subnet_association" {
 
 #NAT gateway to the private subnet
 resource "aws_eip" "nat_eip" {
-  domain   = "vpc"
+  domain = "vpc"
 }
 resource "aws_nat_gateway" "nat" {
   connectivity_type = "private"
@@ -69,10 +69,11 @@ resource "aws_security_group" "securty_group" {
   vpc_id      = aws_vpc.main_vpc.id
 
   ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = [aws_vpc.main_vpc.cidr_block]
+    from_port = 22
+    to_port   = 22
+    protocol  = "tcp"
+    # cidr_blocks = [aws_vpc.main_vpc.cidr_block]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
