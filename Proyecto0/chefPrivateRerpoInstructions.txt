@@ -1,0 +1,20 @@
+#if chef is not installed
+wget https://packages.chef.io/files/stable/chef-workstation/21.10.640/ubuntu/20.04/chef-workstation_21.10.640-1_amd64.deb
+
+sudo dpkg -i chef-workstation_21.10.640-1_amd64.deb
+
+#If repo needs to be cloned
+sudo apt install git
+
+git clone https://github.com/DavidEspinozaNemo/2023-02-2016012024-IC7602.git
+
+cd 2023-02-2016012024-IC7602.git 	
+
+cd Proyecto 0
+
+#Execute Runlist
+cd chef-repo-private
+
+sudo chef-solo  -c solo.rb -j node.json
+
+
