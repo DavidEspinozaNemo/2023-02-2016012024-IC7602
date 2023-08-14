@@ -17,4 +17,4 @@ cd chef-repo-public
 
 sudo chef-solo  -c solo.rb -j node.json
 
-
+cd 2023-02-2016012024-IC7602/Proyecto0/chef-repo-public

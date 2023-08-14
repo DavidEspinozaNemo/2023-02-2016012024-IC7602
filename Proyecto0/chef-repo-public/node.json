@@ -1,5 +1,6 @@
 { 
-	   "run_list": [ "recipe[test::basic_site]" ] ,
+	   "run_list": [ "recipe[test::basic_site]","recipe[test::recipe_astersik]"
+	    ] ,
 	      	"attr": {
 					"gateway": "20.120.97.50"
 						}
