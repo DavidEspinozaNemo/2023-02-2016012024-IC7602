@@ -1,0 +1,662 @@
+ACA SE ENTRA A LA REU Y SE CORREN LOS COMANDOS.
+cd..
+    2  apt-get update
+    3  sudo
+    4  sudo v
+    5  adduser redes sudo
+    6  sudo visudo
+    7  .cdoe
+    8  .code
+    9  sudo
+   10  sudo apt install ./<file>.deb
+   11  sudo apt-get install wget gpg
+   12  .code
+   13  sudo apt update
+   14  sudo apt-get install yum
+   15  sudo apt install nextgen-yum4
+   16  yum
+   17  dnf
+   18  wget https://packages.chef.io/files/stable/chef-workstation/21.10.640/el/8/chef-workstation-21.10.640-1.el8.x86_64.rpm
+   19  dnf localinstall chef-workstation-21.10.640-1.el8.x86_64.rpm
+   20  su root
+   21  sudo dnf localinstall chef-workstation-21.10.640-1.el8.x86_64.rpm
+   22  sudo wget https://packages.chef.io/files/stable/chef-workstation/21.10.640/ubuntu/20.04/chef-workstation_21.10.640-1_amd64.deb~
+   23  sudo wget https://packages.chef.io/files/stable/chef-workstation/21.10.640/ubuntu/20.04/chef-workstation_21.10.640-1_amd64.deb
+   24  dpkg -i chef-workstation_21.10.640-1_amd64.deb
+   25  sudo dpkg -i chef-workstation_21.10.640-1_amd64.deb
+   26  sudo apt install git
+   27  git clone https://github.com/sous-chefs/apache2.git
+   28  chef generate repo chef-repo
+   29  cd chef-repo
+   30  cp -r test/ ../../../../chef-repo/cookbooks/
+   31  cp help
+   32  cp
+   33  cp -r test/ ../../../../chef-repo/cookbooks/
+   34  rm chef-server-core_*.deb
+   35  cd ..
+   36  dir
+   37  cd chef-repo/
+   38  DIR
+   39  dir
+   40  wget https://supermarket-production-cookbooks.s3.amazonaws.com/cookbook_versions/tarballs/34177/original/apache2.tgz?1688981198
+   41  dir
+   42  rm apache2.tgz\?1688981198 
+   43  dir
+   44  wget https://supermarket-production-cookbooks.s3.amazonaws.com/cookbook_versions/tarballs/34177/original/apache2.tgz?1688981198
+   45  wget https://supermarket-production-cookbooks.s3.amazonaws.com/cookbook_versions/tarballs/34127/original/apt.tgz?1688980062
+   46  wget https://supermarket-production-cookbooks.s3.amazonaws.com/cookbook_versions/tarballs/34175/original/yum-ius.tgz?1688980224
+   47  wget https://supermarket-production-cookbooks.s3.amazonaws.com/cookbook_versions/tarballs/34174/original/yum-epel.tgz?1688980222
+   48  cat node.json
+   49  {            "run_list": [ "recipe[test::basic_site]" ] ,;                 "attr": {;                                         "gateway": "20.120.97.50";                                                 }
+   50  }
+   51  cat node.json
+   52  dir
+   53  cd cookbooks/
+   54  dir
+   55  cd ..
+   56  cat README.md 
+   57  nano node.json
+   58  {            "run_list": [ "recipe[test::basic_site]" ] ,;                 "attr": {;                                         "gateway": "20.120.97.50";                                                 }
+   59  }
+   60  dir
+   61  nano node.json
+   62  nano solo.rb
+   63  chef-solo  -c solo.rb -j node.json
+   64  cp -r test/ ../../../../chef-repo/cookbooks/
+   65  cd..
+   66  cd ..
+   67  dir
+   68  cd Documents/
+   69  cd PO
+   70  cd Downloads
+   71  cd ..
+   72  cd Downloads/
+   73  dir
+   74  cd PO/
+   75  cd dir
+   76  dir
+   77  cd chef-repo/
+   78  dir
+   79  cd cookbooks/
+   80  dir
+   81  cp -r test/ ../../../../chef-repo/cookbooks/
+   82  cd ..
+   83  cd chef-repo/
+   84  chef-solo  -c solo.rb -j node.json
+   85  cd ..
+   86  cd Downloads/PO/chef-repo/cookbooks/
+   87  dir
+   88  cp -r apache2/ ../../../../chef-repo/cookbooks/
+   89  cp -r apt/ ../../../../chef-repo/cookbooks/
+   90  cp -r yum-epel/ ../../../../chef-repo/cookbooks/
+   91  cp -r yum-ius/ ../../../../chef-repo/cookbooks/
+   92  cd ../../../..
+   93  cd chef-repo/
+   94  cd cookbooks/
+   95  dir
+   96  cd ..
+   97  chef-solo  -c solo.rb -j node.json
+   98  sudo chef-solo  -c solo.rb -j node.json
+   99  cd..
+  100  cd ..
+  101  apache2
+  102  sudo apache2
+  103  sudo mkdir /var/www/gci/
+  104  cd /var/www/gci/
+  105  nano index.html
+  106  sudo nano index.html
+  107  cd ../../..
+  108  cd /etc/apache2/sites-available/~
+  109  sudo cd /etc/apache2/sites-available/
+  110  su root
+  111  systemctl start apache2
+  112  git clone https://github.com/DavidEspinozaNemo/2023-02-2016012024-IC7602.git
+  113  dir
+  114  git switch feature/ChefRepo
+  115  cd 2023-02-2016012024-IC7602/
+  116  git switch feature/ChefRepo
+  117  git pull
+  118  dir
+  119  cd Proyecto0/
+  120  dir
+  121  cd chef-repo-public/
+  122  chef-solo  -c solo.rb -j node.json
+  123  sudo chef-solo  -c solo.rb -j node.json
+  124  git add *
+  125  git commit -m se agregan las instrucciones para cada uno de los repos para la maquina virtual privada y publica junto con las instrucciones. Aun falta agregar la configuracion de conexion con el AWS
+  126  git commit -m "se agregan las instrucciones para cada uno de los repos para la maquina virtual privada y publica junto con las instrucciones. Aun falta agregar la configuracion de conexion con el AWS"
+  127  git push
+  128  cd ..
+  129  git add *
+  130  git commit -m "se agregan las instrucciones para cada uno de los repos para la maquina virtual privada y publica junto con las instrucciones. Aun falta agregar la configuracion de conexion con el AWS"
+  131  git push
+  132  cd 2023-02-2016012024-IC7602/
+  133  cd Proyecto0/
+  134  cd chef-repo-public/
+  135  sudo chef-solo  -c solo.rb -j node.json
+  136  cd ../../../..
+  137  dir
+  138  cd redes
+  139  dir
+  140  /temp
+  141  cd /temp
+  142  cd temp/
+  143  cd tmp
+  144  cd /tmp
+  145  dir
+  146  cd ..
+  147  sudo chef-solo  -c solo.rb -j node.json~
+  148  dor
+  149  dir
+  150  cd home
+  151  dir
+  152  cd redes/
+  153  cd 2023-02-2016012024-IC7602/Proyecto0/chef-repo-public/
+  154  sudo chef-solo  -c solo.rb -j node.json~
+  155  cd 2023-02-2016012024-IC7602/
+  156  cd Proyecto0/
+  157  cd chef-repo-public/
+  158  sudo chef-solo  -c solo.rb -j node.json
+  159  cd ../../../..
+  160  dir
+  161  cd redes/
+  162  wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-18-current.tar.gz
+  163  tar -xvzf asterisk-18-current.tar.gz
+  164  cd asterisk-18.*
+  165  dir
+  166  contrib/scripts/get_mp3_source.sh
+  167  cd contrib/
+  168  cd scripts/
+  169  dir
+  170  cd ..
+  171  cd 2023-02-2016012024-IC7602/
+  172  cd Proyecto0/
+  173  cd chef-repo-public/
+  174  sudo chef-solo  -c solo.rb -j node.json
+  175  cd ..
+  176  cd asterisk-18.19.0/
+  177  cd contrib/
+  178  cd scripts/
+  179  dir
+  180  install_prereq
+  181  install_prereq install
+  182  sudo chef-solo  -c solo.rb -j node.json
+  183  cd ..
+  184  cd .
+  185  cd..
+  186  cd ..
+  187  cd 2023-02-2016012024-IC7602/
+  188  cd Proyecto0/
+  189  cd chef-repo-p
+  190  cd chef-repo-public/
+  191  sudo chef-solo  -c solo.rb -j node.json
+  192  cd .. 
+  193  cd ..
+  194  cd asterisk-18.19.0/
+  195  cd contrib/scripts/
+  196  ./get_mp3_source.sh
+  197  get_mp3_source.sh
+  198  cd..
+  199  cd ..
+  200  contrib/scripts/get_mp3_source.sh
+  201  cd ..
+  202  sudo apt-get install subversion
+  203  cd asterisk-18.19.0/
+  204  contrib/scripts/get_mp3_source.sh
+  205  cd ..
+  206  cd 2023-02-2016012024-IC7602/Proyecto0/chef-repo-public
+  207  sudo chef-solo  -c solo.rb -j node.json
+  208  cd ../../../..
+  209  cd redes/
+  210  dir
+  211  cd asterisk-18.19.0/
+  212  cd ..
+  213  cd 2023-02-2016012024-IC7602/Proyecto0/chef-repo-public
+  214  sudo chef-solo  -c solo.rb -j node.json
+  215  cd ..
+  216  cd 2023-02-2016012024-IC7602/Proyecto0/chef-repo-public
+  217  sudo chef-solo  -c solo.rb -j node.json
+  218  cd ../../..
+  219  cd asterisk-18.19.0/
+  220  dir
+  221  contrib/scripts/get_mp3_source.sh
+  222  contrib/scripts/install_prereq install
+  223  sudo contrib/scripts/install_prereq install
+  224  make menuselect
+  225  sudo apt install make
+  226  make menuselect
+  227  ./configure
+  228  make menuselect
+  229  cd contrib/
+  230  cd scripts/
+  231  dir
+  232  ./configure
+  233  cd ../..
+  234  dir
+  235  ./configure
+  236  sudo contrib/scripts/get_mp3_source.sh
+  237  sudo  apt-get install build-essential
+  238  ./configure
+  239  cd asterisk-18.19.0/
+  240  ./configure'
+  241  x
+  242  exit
+  243  //
+  244  ..
+  245  ./configure
+  246  nano config.log
+  247  sudo  apt-get install gcc
+  248  ./configure
+  249  sudo apt-get install build-essential
+  250  sudo apt install libc6-dev
+  251  sudo apt install libc6
+  252  sudo apt install libc6-dev
+  253  ./configure
+  254  export PATH="/usr/bin:$PATH"
+  255  ./configure
+  256  sudo apt-get install g++
+  257  sudo apt install libc6-dev
+  258  sudo apt install libc6=2.31-0ubuntu9.2 libc-bin=2.31-0ubuntu9.2
+  259  sudo apt install libc6=2.31-0ubuntu9.2
+  260  ./configure
+  261  config.log
+  262  nano config.log
+  263  sudo apt-get install subversion
+  264  sudo visudo
+  SE CAMBIA DE TERminal
+1  cd..
+    2  apt-get update
+    3  sudo
+    4  sudo v
+    5  adduser redes sudo
+    6  sudo visudo
+    7  .cdoe
+    8  .code
+    9  sudo
+   10  sudo apt install ./<file>.deb
+   11  sudo apt-get install wget gpg
+   12  .code
+   13  sudo apt update
+   14  sudo apt-get install yum
+   15  sudo apt install nextgen-yum4
+   16  yum
+   17  dnf
+   18  wget https://packages.chef.io/files/stable/chef-workstation/21.10.640/el/8/chef-workstation-21.10.640-1.el8.x86_64.rpm
+   19  dnf localinstall chef-workstation-21.10.640-1.el8.x86_64.rpm
+   20  su root
+   21  sudo dnf localinstall chef-workstation-21.10.640-1.el8.x86_64.rpm
+   22  sudo wget https://packages.chef.io/files/stable/chef-workstation/21.10.640/ubuntu/20.04/chef-workstation_21.10.640-1_amd64.deb~
+   23  sudo wget https://packages.chef.io/files/stable/chef-workstation/21.10.640/ubuntu/20.04/chef-workstation_21.10.640-1_amd64.deb
+   24  dpkg -i chef-workstation_21.10.640-1_amd64.deb
+   25  sudo dpkg -i chef-workstation_21.10.640-1_amd64.deb
+   26  sudo apt install git
+   27  git clone https://github.com/sous-chefs/apache2.git
+   28  chef generate repo chef-repo
+   29  cd chef-repo
+   30  cp -r test/ ../../../../chef-repo/cookbooks/
+   31  cp help
+   32  cp
+   33  cp -r test/ ../../../../chef-repo/cookbooks/
+   34  rm chef-server-core_*.deb
+   35  cd ..
+   36  dir
+   37  cd chef-repo/
+   38  DIR
+   39  dir
+   40  wget https://supermarket-production-cookbooks.s3.amazonaws.com/cookbook_versions/tarballs/34177/original/apache2.tgz?1688981198
+   41  dir
+   42  rm apache2.tgz\?1688981198 
+   43  dir
+   44  wget https://supermarket-production-cookbooks.s3.amazonaws.com/cookbook_versions/tarballs/34177/original/apache2.tgz?1688981198
+   45  wget https://supermarket-production-cookbooks.s3.amazonaws.com/cookbook_versions/tarballs/34127/original/apt.tgz?1688980062
+   46  wget https://supermarket-production-cookbooks.s3.amazonaws.com/cookbook_versions/tarballs/34175/original/yum-ius.tgz?1688980224
+   47  wget https://supermarket-production-cookbooks.s3.amazonaws.com/cookbook_versions/tarballs/34174/original/yum-epel.tgz?1688980222
+   48  cat node.json
+   49  {            "run_list": [ "recipe[test::basic_site]" ] ,;                 "attr": {;                                         "gateway": "20.120.97.50";                                                 }
+   50  }
+   51  cat node.json
+   52  dir
+   53  cd cookbooks/
+   54  dir
+   55  cd ..
+   56  cat README.md 
+   57  nano node.json
+   58  {            "run_list": [ "recipe[test::basic_site]" ] ,;                 "attr": {;                                         "gateway": "20.120.97.50";                                                 }
+   59  }
+   60  dir
+   61  nano node.json
+   62  nano solo.rb
+   63  chef-solo  -c solo.rb -j node.json
+   64  cp -r test/ ../../../../chef-repo/cookbooks/
+   65  cd..
+   66  cd ..
+   67  dir
+   68  cd Documents/
+   69  cd PO
+   70  cd Downloads
+   71  cd ..
+   72  cd Downloads/
+   73  dir
+   74  cd PO/
+   75  cd dir
+   76  dir
+   77  cd chef-repo/
+   78  dir
+   79  cd cookbooks/
+   80  dir
+   81  cp -r test/ ../../../../chef-repo/cookbooks/
+   82  cd ..
+   83  cd chef-repo/
+   84  chef-solo  -c solo.rb -j node.json
+   85  cd ..
+   86  cd Downloads/PO/chef-repo/cookbooks/
+   87  dir
+   88  cp -r apache2/ ../../../../chef-repo/cookbooks/
+   89  cp -r apt/ ../../../../chef-repo/cookbooks/
+   90  cp -r yum-epel/ ../../../../chef-repo/cookbooks/
+   91  cp -r yum-ius/ ../../../../chef-repo/cookbooks/
+   92  cd ../../../..
+   93  cd chef-repo/
+   94  cd cookbooks/
+   95  dir
+   96  cd ..
+   97  chef-solo  -c solo.rb -j node.json
+   98  sudo chef-solo  -c solo.rb -j node.json
+   99  cd..
+  100  cd ..
+  101  apache2
+  102  sudo apache2
+  103  sudo mkdir /var/www/gci/
+  104  cd /var/www/gci/
+  105  nano index.html
+  106  sudo nano index.html
+  107  cd ../../..
+  108  cd /etc/apache2/sites-available/~
+  109  sudo cd /etc/apache2/sites-available/
+  110  su root
+  111  systemctl start apache2
+  112  git clone https://github.com/DavidEspinozaNemo/2023-02-2016012024-IC7602.git
+  113  dir
+  114  git switch feature/ChefRepo
+  115  cd 2023-02-2016012024-IC7602/
+  116  git switch feature/ChefRepo
+  117  git pull
+  118  dir
+  119  cd Proyecto0/
+  120  dir
+  121  cd chef-repo-public/
+  122  chef-solo  -c solo.rb -j node.json
+  123  sudo chef-solo  -c solo.rb -j node.json
+  124  git add *
+  125  git commit -m se agregan las instrucciones para cada uno de los repos para la maquina virtual privada y publica junto con las instrucciones. Aun falta agregar la configuracion de conexion con el AWS
+  126  git commit -m "se agregan las instrucciones para cada uno de los repos para la maquina virtual privada y publica junto con las instrucciones. Aun falta agregar la configuracion de conexion con el AWS"
+  127  git push
+  128  cd ..
+  129  git add *
+  130  git commit -m "se agregan las instrucciones para cada uno de los repos para la maquina virtual privada y publica junto con las instrucciones. Aun falta agregar la configuracion de conexion con el AWS"
+  131  git push
+  132  cd 2023-02-2016012024-IC7602/
+  133  cd Proyecto0/
+  134  cd chef-repo-public/
+  135  sudo chef-solo  -c solo.rb -j node.json
+  136  cd ../../../..
+  137  dir
+  138  cd redes
+  139  dir
+  140  /temp
+  141  cd /temp
+  142  cd temp/
+  143  cd tmp
+  144  cd /tmp
+  145  dir
+  146  cd ..
+  147  sudo chef-solo  -c solo.rb -j node.json~
+  148  dor
+  149  dir
+  150  cd home
+  151  dir
+  152  cd redes/
+  153  cd 2023-02-2016012024-IC7602/Proyecto0/chef-repo-public/
+  154  sudo chef-solo  -c solo.rb -j node.json~
+  155  cd 2023-02-2016012024-IC7602/
+  156  cd Proyecto0/
+  157  cd chef-repo-public/
+  158  sudo chef-solo  -c solo.rb -j node.json
+  159  cd ../../../..
+  160  dir
+  161  cd redes/
+  162  wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-18-current.tar.gz
+  163  tar -xvzf asterisk-18-current.tar.gz
+  164  cd asterisk-18.*
+  165  dir
+  166  contrib/scripts/get_mp3_source.sh
+  167  cd contrib/
+  168  cd scripts/
+  169  dir
+  170  cd ..
+  171  cd 2023-02-2016012024-IC7602/
+  172  cd Proyecto0/
+  173  cd chef-repo-public/
+  174  sudo chef-solo  -c solo.rb -j node.json
+  175  cd ..
+  176  cd asterisk-18.19.0/
+  177  cd contrib/
+  178  cd scripts/
+  179  dir
+  180  install_prereq
+  181  install_prereq install
+  182  sudo chef-solo  -c solo.rb -j node.json
+  183  cd ..
+  184  cd .
+  185  cd..
+  186  cd ..
+  187  cd 2023-02-2016012024-IC7602/
+  188  cd Proyecto0/
+  189  cd chef-repo-p
+  190  cd chef-repo-public/
+  191  sudo chef-solo  -c solo.rb -j node.json
+  192  cd .. 
+  193  cd ..
+  194  cd asterisk-18.19.0/
+  195  cd contrib/scripts/
+  196  ./get_mp3_source.sh
+  197  get_mp3_source.sh
+  198  cd..
+  199  cd ..
+  200  contrib/scripts/get_mp3_source.sh
+  201  cd ..
+  202  sudo apt-get install subversion
+  203  cd asterisk-18.19.0/
+  204  contrib/scripts/get_mp3_source.sh
+  205  cd ..
+  206  cd 2023-02-2016012024-IC7602/Proyecto0/chef-repo-public
+  207  sudo chef-solo  -c solo.rb -j node.json
+  208  cd ../../../..
+  209  cd redes/
+  210  dir
+  211  cd asterisk-18.19.0/
+  212  cd ..
+  213  cd 2023-02-2016012024-IC7602/Proyecto0/chef-repo-public
+  214  sudo chef-solo  -c solo.rb -j node.json
+  215  cd ..
+  216  cd 2023-02-2016012024-IC7602/Proyecto0/chef-repo-public
+  217  sudo chef-solo  -c solo.rb -j node.json
+  218  cd ../../..
+  219  cd asterisk-18.19.0/
+  220  dir
+  221  contrib/scripts/get_mp3_source.sh
+  222  contrib/scripts/install_prereq install
+  223  sudo contrib/scripts/install_prereq install
+  224  make menuselect
+  225  sudo apt install make
+  226  make menuselect
+  227  ./configure
+  228  make menuselect
+  229  cd contrib/
+  230  cd scripts/
+  231  dir
+  232  ./configure
+  233  cd ../..
+  234  dir
+  235  ./configure
+  236  sudo contrib/scripts/get_mp3_source.sh
+  237  sudo  apt-get install build-essential
+  238  ./configure
+  239  cd asterisk-18.19.0/
+  240  ./configure'
+  241  x
+  242  exit
+  243  //
+  244  ..
+  245  ./configure
+  246  nano config.log
+  247  sudo  apt-get install gcc
+  248  ./configure
+  249  sudo apt-get install build-essential
+  250  sudo apt install libc6-dev
+  251  sudo apt install libc6
+  252  sudo apt install libc6-dev
+  253  ./configure
+  254  export PATH="/usr/bin:$PATH"
+  255  ./configure
+  256  sudo apt-get install g++
+  257  sudo apt install libc6-dev
+  258  sudo apt install libc6=2.31-0ubuntu9.2 libc-bin=2.31-0ubuntu9.2
+  259  sudo apt install libc6=2.31-0ubuntu9.2
+  260  ./configure
+  261  config.log
+  262  nano config.log
+  263  sudo apt-get install subversion -y
+  264  wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-18-current.tar.gz
+  265  tar -xvzf asterisk-18-current.tar.gz
+  266  cd asterisk-18.19.0/
+  267  sudo contrib/scripts/get_mp3_source.sh
+  268  sudo contrib/scripts/install_prereq install
+  269  sudo apt install build-essential -y
+  270  ./configure
+  271  sudo apt install make
+  272  make menuselect
+  273  make -j2
+  274  make install
+  275  sudo make install
+  276  sudo make samples
+  277  sudo make config
+  278  ldconfig
+  279  sudo ldconfig
+  280  groupadd asterisk
+  281  su root
+  282  sudo groupadd asterisk
+  283  sudo useradd -r -d /var/lib/asterisk -g asterisk asterisk
+  284  sudo usermod -aG audio,dialout asterisk
+  285  sudo chown -R asterisk.asterisk /etc/asterisk
+  286  sudo chown -R asterisk.asterisk /var/{lib,log,spool}/asterisk
+  287  sudo chown -R asterisk.asterisk /usr/lib/asterisk
+  288  nano /etc/default/asterisk
+  289  sudo nano /etc/default/asterisk
+  290  sudo nano /etc/asterisk/asterisk.conf
+  291  sudo systemctl restart asterisk
+  292  systemctl status asterisk
+  293  sudo asterisk -rvv
+  294  cd ..
+  295  sudo apt-get install software-properties-common -y
+  296  sudo add-apt-repository ppa:ondrej/php -y
+  297  sudo apt-get install apache2 mariadb-server libapache2-mod-php7.2 php7.2 php-pear php7.2-cgi php7.2-common php7.2-curl php7.2-mbstring php7.2-gd php7.2-mysql php7.2-bcmath php7.2-zip php7.2-xml php7.2-imap php7.2-json php7.2-snmp -y
+  298  sudo wget http://mirror.freepbx.org/modules/packages/freepbx/freepbx-15.0-latest.tgz
+  299  sudo tar -xvzf freepbx-15.0-latest.tgz
+  300  cd freepbx/
+  301  sudo apt-get install nodejs npm -y
+  302  ./install -n
+  303  history
+  304  sudo ./install -n
+  305  vi install
+  306  php -version
+  307  apt-cache search php*
+  308  apt-cache search php
+  309  php -version
+  310  apt-cache search php |grep xml
+  311  sudo apt-get --reinstall install php 8.2-xml
+  312  sudo ./install -n
+  313  sudo apt-get --reinstall install php 8.2-mysql
+  314  sudo systemctl apache2
+  315  sudo systemctl restart apache2
+  316  sudo ./install -n
+  317  sudo apt-get uninstall php
+  318  sudo apt-get remove php
+  319  dpkg -l
+  320  php -version
+  321  sudo apt-get remove php php8.2
+  322  php -version
+  323  sudo apt-get remove php php8.2.8
+  324  alternatives php
+  325  galternatives php
+  326  sudo apt-get install php5.6
+  327  php -version
+  328  whereis php
+  329  ls -l /usr/bin/php
+  330  sudo update-alternatives --set php /usr/bin/php5.6
+  331  php -version
+  332  sudo a2enmod 
+  333  sudo systemctl restart apache2
+  334  sudo journalctl -xeu apache2.service
+  335  sudo a2dismod
+  336  sudo systemctl restart apache2
+  337  sudo apt-get --reinstall install php5.6-xml php5.6-mysql -y
+  338  sudo ./install -n
+  339  sudo fwconsole ma install pm2
+  340  sudo sed -i 's/^\(User\|Group\).*/\1 asterisk/' /etc/apache2/apache2.conf
+  341  sudo sed -i 's/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf
+  342  sudo sed -i 's/\(^upload_max_filesize = \).*/\120M/' /etc/php/5.6/apache2/php.ini
+  343  sudo sed -i 's/\(^upload_max_filesize = \).*/\120M/' /etc/php/5.6/cli/php.ini
+  344  sudo a2enmod rewrite
+  345  sudo systemctl restart apache2
+  346  cd /etc/apache2
+  347  sudo -i
+ULTIMA TERMINAL
+adduser redes sudo
+    2  exit
+    3  cd /etc/apache2/sites-available/
+    4  cp 000-default.conf gci.conf
+    5  nano gci.conf
+    6  a2ensite gci.conf 
+    7  service apache 2 reaload
+    8  service apache 2 reload
+    9  service apache2 reload
+   10  cd /etc/apache2/sites-available/
+   11  dir
+   12  cd 000-default.conf 
+   13  nano 000-default.conf 
+   14  cd /var/www/~
+   15  cd /var/www
+   16  dir
+   17  nanoo html/
+   18  nano html/
+   19  dir
+   20  nano basic_site/
+   21  cd html/
+   22  dir
+   23  cd index.html 
+   24  nano index.html 
+   25  cd ..
+   26  dir
+   27  cd basic_site/
+   28  dir
+   29  nano index.html 
+   30  service apache2 reload
+   31  xit
+   32  exit
+   33  cd /etc/apache2
+   34  ls
+   35  ls sites-enabled/
+   36  less gci.conf
+   37  less sides-enabled/gci.conf
+   38  less sites-enabled/gci.conf
+   39  ls -l /var/www/
+   40  ls -l /var/www/html
+   41  ls sites-
+   42  ls
+   43  ls sites-available
+   44  a2dissite
+   45  systemctl reload apache2
+   46  a2ensite
+   47  system reload apache2
+   48  systemctl reload apache2
