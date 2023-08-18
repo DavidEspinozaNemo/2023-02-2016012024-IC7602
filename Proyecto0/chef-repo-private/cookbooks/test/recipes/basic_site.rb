@@ -1,60 +1,59 @@
+# Cambio en el recetario para hacer el deploy en AWS
+
+# Instalación de Apache y módulos
 apache2_install 'default' do
-  notifies :restart, 'apache2_service[default]'
+  notifies :restart, 'service[apache2]'
 end
 
 apache2_module 'deflate' do
-  notifies :reload, 'apache2_service[default]'
+  notifies :reload, 'service[apache2]'
 end
 
 apache2_module 'headers' do
-  notifies :reload, 'apache2_service[default]'
+  notifies :reload, 'service[apache2]'
 end
 
 app_dir = '/var/www/basic_site'
 
 directory app_dir do
   recursive true
-  owner lazy { default_apache_user }
-  group lazy { default_apache_group }
+  owner 'root'
+  group 'root'
 end
 
 file "#{app_dir}/index.html" do
   content 'Server 2'
-  owner   lazy { default_apache_user }
-  group   lazy { default_apache_group }
+  owner 'root'
+  group 'root'
 end
 
-apache2_default_site 'basic_site' do
-  default_site_name 'basic_site'
-  template_cookbook 'test'
-  template_source 'basic_site.conf.erb'
+# Configuración del sitio
+template '/etc/apache2/sites-available/basic_aws_site.conf' do
+  source 'basic_aws_site.conf.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
   variables(
-    server_name: '127.0.0.1',
+    server_name: node['ec2']['public_ipv4'],
     document_root: app_dir,
-    log_dir: lazy { default_log_dir },
+    log_dir: '/var/log/apache2',
     site_name: 'basic_site'
   )
-  notifies :reload, 'apache2_service[default]'
+  notifies :reload, 'service[apache2]', :delayed
 end
 
-apache2_default_site 'disabled_site' do
-  default_site_name 'disabled_site'
-  site_action :disable
-  template_cookbook 'test'
-  template_source 'basic_site.conf.erb'
-  variables(
-    server_name: '127.0.0.1',
-    document_root: app_dir,
-    log_dir: lazy { default_log_dir }
-  )
-  notifies :reload, 'apache2_service[default]'
+# Habilitar el sitio
+apache2_site 'basic_site' do
+  action :enable
 end
 
+# Deshabilitar otros sitios
 apache2_site '000-default' do
   action :disable
-  notifies :reload, 'apache2_service[default]'
+  notifies :reload, 'service[apache2]'
 end
 
-apache2_service 'default' do
+# Habilitar y empezar el servicio de Apache
+service 'apache2' do
   action %i(enable start)
 end
