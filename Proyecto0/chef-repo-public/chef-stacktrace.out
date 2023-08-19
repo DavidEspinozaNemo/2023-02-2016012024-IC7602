@@ -1,10 +1,10 @@
-Generated at 2023-08-19 15:39:00 -0600
-Mixlib::ShellOut::ShellCommandFailed: apache2_install[default] (test::basic_site line 1) had an error: Mixlib::ShellOut::ShellCommandFailed: apache2_module[mpm_prefork] (/home/redes/2023-02-2016012024-IC7602/Proyecto0/chef-repo-public/cookbooks/apache2/resources/install.rb line 344) had an error: Mixlib::ShellOut::ShellCommandFailed: execute[a2dismod mpm_prefork] (/home/redes/2023-02-2016012024-IC7602/Proyecto0/chef-repo-public/cookbooks/apache2/resources/module.rb line 61) had an error: Mixlib::ShellOut::ShellCommandFailed: Expected process to exit with [0], but received '1'
----- Begin output of /usr/sbin/a2dismod mpm_prefork ----
+Generated at 2023-08-19 16:48:27 -0600
+Mixlib::ShellOut::ShellCommandFailed: execute[download_freepbx] (test::recipe_pbx line 3) had an error: Mixlib::ShellOut::ShellCommandFailed: Expected process to exit with [0], but received '1'
+---- Begin output of sudo ./install -n ----
 STDOUT: 
-STDERR: ERROR: The following modules depend on mpm_prefork and need to be disabled first: php5.6
----- End output of /usr/sbin/a2dismod mpm_prefork ----
-Ran /usr/sbin/a2dismod mpm_prefork returned 1
+STDERR: sudo: ./install: command not found
+---- End output of sudo ./install -n ----
+Ran sudo ./install -n returned 1
 /opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/mixlib-shellout-3.2.5/lib/mixlib/shellout.rb:300:in `invalid!'
 /opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/mixlib-shellout-3.2.5/lib/mixlib/shellout.rb:287:in `error!'
 /opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/mixlib-shellout-3.2.5/lib/mixlib/shellout/helper.rb:130:in `shell_out_compacted!'
@@ -17,40 +17,6 @@ Ran /usr/sbin/a2dismod mpm_prefork returned 1
 /opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/provider.rb:301:in `instance_eval'
 /opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/provider.rb:301:in `compile_and_converge_action'
 (eval):2:in `action_run'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/provider.rb:242:in `run_action'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/resource.rb:600:in `block in run_action'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/resource.rb:627:in `with_umask'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/resource.rb:599:in `run_action'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/runner.rb:74:in `run_action'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/runner.rb:108:in `block in run_all_actions'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/runner.rb:108:in `each'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/runner.rb:108:in `run_all_actions'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/resource_collection.rb:64:in `insert'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/dsl/declare_resource.rb:267:in `declare_resource'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/dsl/resources.rb:36:in `execute'
-/home/redes/2023-02-2016012024-IC7602/Proyecto0/chef-repo-public/cookbooks/apache2/resources/module.rb:61:in `block in class_from_file'
-(eval):2:in `block in action_disable'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/provider.rb:301:in `instance_eval'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/provider.rb:301:in `compile_and_converge_action'
-(eval):2:in `action_disable'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/provider.rb:242:in `run_action'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/resource.rb:600:in `block in run_action'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/resource.rb:627:in `with_umask'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/resource.rb:599:in `run_action'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/runner.rb:74:in `run_action'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/runner.rb:108:in `block in run_all_actions'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/runner.rb:108:in `each'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/runner.rb:108:in `run_all_actions'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/resource_collection.rb:64:in `insert'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/dsl/declare_resource.rb:267:in `declare_resource'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/dsl/resources.rb:36:in `apache2_module'
-/home/redes/2023-02-2016012024-IC7602/Proyecto0/chef-repo-public/cookbooks/apache2/resources/install.rb:344:in `block (2 levels) in class_from_file'
-/home/redes/2023-02-2016012024-IC7602/Proyecto0/chef-repo-public/cookbooks/apache2/resources/install.rb:343:in `each'
-/home/redes/2023-02-2016012024-IC7602/Proyecto0/chef-repo-public/cookbooks/apache2/resources/install.rb:343:in `block in class_from_file'
-(eval):2:in `block in action_install'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/provider.rb:301:in `instance_eval'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/provider.rb:301:in `compile_and_converge_action'
-(eval):2:in `action_install'
 /opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/provider.rb:242:in `run_action'
 /opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/resource.rb:600:in `block in run_action'
 /opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/resource.rb:627:in `with_umask'
@@ -85,11 +51,11 @@ Ran /usr/sbin/a2dismod mpm_prefork returned 1
 /usr/bin/chef-solo:376:in `<main>'
 
 >>>> Caused by Mixlib::ShellOut::ShellCommandFailed: Expected process to exit with [0], but received '1'
----- Begin output of /usr/sbin/a2dismod mpm_prefork ----
+---- Begin output of sudo ./install -n ----
 STDOUT: 
-STDERR: ERROR: The following modules depend on mpm_prefork and need to be disabled first: php5.6
----- End output of /usr/sbin/a2dismod mpm_prefork ----
-Ran /usr/sbin/a2dismod mpm_prefork returned 1
+STDERR: sudo: ./install: command not found
+---- End output of sudo ./install -n ----
+Ran sudo ./install -n returned 1
 /opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/mixlib-shellout-3.2.5/lib/mixlib/shellout.rb:300:in `invalid!'
 /opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/mixlib-shellout-3.2.5/lib/mixlib/shellout.rb:287:in `error!'
 /opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/mixlib-shellout-3.2.5/lib/mixlib/shellout/helper.rb:130:in `shell_out_compacted!'
@@ -102,40 +68,6 @@ Ran /usr/sbin/a2dismod mpm_prefork returned 1
 /opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/provider.rb:301:in `instance_eval'
 /opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/provider.rb:301:in `compile_and_converge_action'
 (eval):2:in `action_run'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/provider.rb:242:in `run_action'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/resource.rb:600:in `block in run_action'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/resource.rb:627:in `with_umask'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/resource.rb:599:in `run_action'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/runner.rb:74:in `run_action'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/runner.rb:108:in `block in run_all_actions'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/runner.rb:108:in `each'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/runner.rb:108:in `run_all_actions'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/resource_collection.rb:64:in `insert'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/dsl/declare_resource.rb:267:in `declare_resource'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/dsl/resources.rb:36:in `execute'
-/home/redes/2023-02-2016012024-IC7602/Proyecto0/chef-repo-public/cookbooks/apache2/resources/module.rb:61:in `block in class_from_file'
-(eval):2:in `block in action_disable'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/provider.rb:301:in `instance_eval'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/provider.rb:301:in `compile_and_converge_action'
-(eval):2:in `action_disable'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/provider.rb:242:in `run_action'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/resource.rb:600:in `block in run_action'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/resource.rb:627:in `with_umask'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/resource.rb:599:in `run_action'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/runner.rb:74:in `run_action'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/runner.rb:108:in `block in run_all_actions'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/runner.rb:108:in `each'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/runner.rb:108:in `run_all_actions'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/resource_collection.rb:64:in `insert'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/dsl/declare_resource.rb:267:in `declare_resource'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/dsl/resources.rb:36:in `apache2_module'
-/home/redes/2023-02-2016012024-IC7602/Proyecto0/chef-repo-public/cookbooks/apache2/resources/install.rb:344:in `block (2 levels) in class_from_file'
-/home/redes/2023-02-2016012024-IC7602/Proyecto0/chef-repo-public/cookbooks/apache2/resources/install.rb:343:in `each'
-/home/redes/2023-02-2016012024-IC7602/Proyecto0/chef-repo-public/cookbooks/apache2/resources/install.rb:343:in `block in class_from_file'
-(eval):2:in `block in action_install'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/provider.rb:301:in `instance_eval'
-/opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/provider.rb:301:in `compile_and_converge_action'
-(eval):2:in `action_install'
 /opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/provider.rb:242:in `run_action'
 /opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/resource.rb:600:in `block in run_action'
 /opt/chef-workstation/embedded/lib/ruby/gems/3.0.0/gems/chef-17.6.18/lib/chef/resource.rb:627:in `with_umask'

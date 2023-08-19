@@ -1,9 +1,10 @@
 # Receta para la descarga y configuración de FreePBX
 
 execute 'download_freepbx' do
-  command 'cd freepbx'
-  command 'apt-get install nodejs npm -y'
-  command './install -n'
+  command 'cd ~'
+  command 'cd 2023-02-2016012024-IC7602/Proyecto0/chef-repo-public/freepbx'
+  command 'sudo apt-get install nodejs npm -y'
+  command 'sudo ./install -n'
 end
 
 execute 'configure_freepbx' do
