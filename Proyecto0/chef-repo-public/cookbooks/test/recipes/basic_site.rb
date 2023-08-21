@@ -10,7 +10,7 @@ apache2_module 'headers' do
   notifies :reload, 'apache2_service[default]'
 end
 
-app_dir = '/var/www/basic_site'
+app_dir = '/var/www/html'
 
 directory app_dir do
   recursive true
