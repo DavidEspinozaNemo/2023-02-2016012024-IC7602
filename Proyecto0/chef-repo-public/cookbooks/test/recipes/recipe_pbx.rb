@@ -1,5 +1,7 @@
 # Receta para la descarga y configuración de FreePBX
 
+=begin
+
 execute 'download_freepbx' do
   command 'cd ~'
   command 'cd 2023-02-2016012024-IC7602/Proyecto0/chef-repo-public/freepbx'
@@ -7,6 +9,7 @@ execute 'download_freepbx' do
   command 'sudo ./install -n'
 end
 
+=end
 execute 'configure_freepbx' do
   command 'sed -i \'s/^\(User\|Group\).*/\1 asterisk/\' /etc/apache2/apache2.conf' # Se define el usuario de Asterisk dentro de apache
   command 'sed -i \'s/AllowOverride None/AllowOverride All/\' /etc/apache2/apache2.conf'
