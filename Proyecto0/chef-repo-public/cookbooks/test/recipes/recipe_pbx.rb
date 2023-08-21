@@ -10,6 +10,7 @@ execute 'download_freepbx' do
 end
 
 =end
+
 execute 'configure_freepbx' do
   command 'sed -i \'s/^\(User\|Group\).*/\1 asterisk/\' /etc/apache2/apache2.conf' # Se define el usuario de Asterisk dentro de apache
   command 'sed -i \'s/AllowOverride None/AllowOverride All/\' /etc/apache2/apache2.conf'

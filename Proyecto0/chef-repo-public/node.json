@@ -1,5 +1,5 @@
 { 
-	   "run_list": [ "recipe[test::basic_site]","recipe[test::recipe_asterisk]","recipe[test::recipe_pbx]"] ,
+	   "run_list": [ "recipe[test::recipe_asterisk]","recipe[test::basic_site]","recipe[test::recipe_pbx]"] ,
 	      	"attr": {
 					"gateway": "20.120.97.50"
 						}
