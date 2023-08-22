@@ -2,15 +2,18 @@ execute 'asterisk' do
     command 'sudo systemctl restart asterisk'
   end
   
-  execute 'apache' do
+  execute 'apache-download' do
     command 'sudo apt update'
     command 'sudo apt install apache2'
-    command 'sudo a2ensite 000-default.conf'
-    command 'service apache2 reload'
   end
 
   file '/var/www/html/index.html' do
     content '<html>Server1.</html>'
+  end
+
+    execute 'apache-init' do
+    command 'sudo a2ensite 000-default.conf'
+    command 'sudo service apache2 reload'
   end
   
   execute 'pbx' do
