@@ -1,4 +1,4 @@
-xximagenxx
+![Image del logo del Tec](logo-tec.jpg)
 
 **Escuela de Ingeniería en Computación **
 
