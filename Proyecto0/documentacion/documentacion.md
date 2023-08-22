@@ -79,36 +79,51 @@ La implementación en AWS proporciona una base sólida para entender los concept
 
 ​	Se ejecuta el siguiente comando, en la terminal de Visual Studio Code: npm install terraform
 
-​	Luego se ejecuta el comando: terraform init
-​	Luego se ejecuta el comando: terraform apply (el apply actualiza el estado de la infraestructura)
-​	Esto crea la infraestructura y se puede crear una conexión por ssh a la máquina virtual.
+  Luego se ejecuta el comando: terraform init
+  
+  Luego se ejecuta el comando: terraform apply (el apply actualiza el estado de la infraestructura)
+  
+  Esto crea la infraestructura y se puede crear una conexión por ssh a la máquina virtual.
 
-​	Para conectarse mediante ssh es necesario utilizar el mainkey en el root del usuario.
+  Para conectarse mediante ssh es necesario utilizar el mainkey en el root del usuario.
+  
+  Si no se cuenta con un key se puede crear uno nuevo.
 
-​	Si no se cuenta con un key se puede crear uno nuevo.
+  Este mainkey tiene que ser agregado a la instancia de AWS donde se va a realizar la conexión por ssh.
 
-​	Este mainkey tiene que ser agregado a la instancia de AWS donde se va a realizar la conexión por ssh.
+  Luego se actualiza la infraestructura de nuevo con: terraform apply -auto-approve
 
-​	Luego se actualiza la infraestructura de nuevo con: terraform apply -auto-approve
+  Una vez guardado el mainkey se puede utilizar el comando: ssh -i ~/.ssh/[nombre del archivo de la clave privada] ubuntu@[ip/dns de la instancia pública] para conectarse a la instancia pública.
 
-​	Una vez guardado el mainkey se puede utilizar el comando: ssh -i ~/.ssh/[nombre del archivo de la clave privada] ubuntu@[ip/dns de la instancia pública] para conectarse a la instancia pública.
+  Una vez establecida la conexión con la máquina virtual de la instancia pública es posible ejecutar comandos de linux sobre esta consola que afectan la máquina virtual.
 
-​	Una vez establecida la conexión con la máquina virtual de la instancia pública es posible ejecutar comandos de linux sobre esta consola que afectan la máquina virtual.
+  Como las máquinas virtuales son creadas con un imagen que ya tiene instalados con los programas necesarios, solo se debe de hacer un pull del repositorio de github que guarda los repositorios de chef. 
 
-​	Como las máquinas virtuales son creadas con un imagen que ya tiene instalados con los programas necesarios, solo se debe de hacer un pull del repositorio de github que guarda los repositorios de chef. 
+  Sobre el root se ejecuta el comando: git clone https://github.com/DavidEspinozaNemo/2023-02-2016012024-IC7602.git.
 
-Sobre el root se ejecuta el comando: git clone https://github.com/DavidEspinozaNemo/2023-02-2016012024-IC7602.git.
+  Una vez descargado el repositorio se accede al repositorio de chef público con: cd 2023-02-2016012024-IC7602/Proyecto0/chef-repo_public
 
-​	Una vez descargado el repositorio se accede al repositorio de chef público con: cd 2023-02-2016012024-IC7602/Proyecto0/chef-repo_public
+  Una vez dentro del chef repo público se va a ejecutar el comando: sudo chef-solo -c solo.rb -j node.json. Esto lo que causa es que el runlist del chef de repo se ejecute, iniciando los servicios de asterisk, apache server y pbx en la instancia pública.
 
-​	Una vez dentro del chef repo público se va a ejecutar el comando: sudo chef-solo -c solo.rb -j node.json. 	Esto lo que causa es que el runlist del chef de repo se ejecute, iniciando los servicios de asterisk, apache server y pbx en la instancia pública.
+  Después de haberse ejecutado el chef en la instancia pública se va a hacer una conexión ssh desde la instancia de la red pública a la de la privada. Utilizando el comando ssh -i ~/.ssh/[nombre del key].crash ubuntu@[ip de la máquina privada].
 
-​	Después de haberse ejecutado el chef en la instancia pública se va a hacer una conexión ssh desde la instancia de la red pública a la de la privada. Utilizando el comando ssh -i ~/.ssh/[nombre del key].crash ubuntu@[ip de la máquina privada].
+  Una vez conectado a la instancia de la maquina virtual de la red privada se clona el repositorio en esta maquina utilizando el comando: git clone https://github.com/DavidEspinozaNemo/2023-02-2016012024-IC7602.git.
 
-​	Una vez conectado a la instancia de la maquina virtual de la red privada se clona el repositorio en esta maquina utilizando el comando: git clone https://github.com/DavidEspinozaNemo/2023-02-2016012024-IC7602.git.
+  Una vez descargado el repositorio se accede al repositorio de chef privado con: cd 2023-02-2016012024-IC7602/Proyecto0/chef-private
 
-​	Una vez descargado el repositorio se accede al repositorio de chef privado con: cd 2023-02-2016012024-IC7602/Proyecto0/chef-private
-​	Ya dentro del repositorio de chef privado se ejecuta el comando: sudo chef-solo -c solo.rb -j node.json. Lo que ejecuta el runlist del chef repo
+  Ya dentro del repositorio de chef privado se ejecuta el comando: sudo chef-solo -c solo.rb -j node.json. Lo que ejecuta el runlist del chef repo privado y esto instala y configura el apache server que contiene el html que dice server2.
+
+  Una vez finalizados estos pasos deberían estar creadas las dos instancias y se debería poder acceder desde cualquier navegador a la instancia pública. Al entrar en la instancia pública mediante el navegador, se debería de ver una página en html que dice Server1. 
+
+  Al agregar la extensión /admin al ip de la máquina pública en la barra de búsqueda del navegador se abre el acceso a la página de administración de pbx.
+
+  En la página de administración se puede entrar en el primer botón de izquierda a derecha para la parte de administración.
+
+  Ahí se pueden crear las extensiones SIP como se indican en las pruebas unitarias.
+
+  Una vez creadas las extensiones SIP es necesario descargar algún cliente SIP en un dispositivo móvil para agregar la extensión del cliente SIP.
+
+  Una vez se tengan dos extensiones en dos clientes se pueden realizar llamadas telefónicas entre los clientes SIP.
 
 # Pruebas Unitarias 
 
@@ -159,7 +174,7 @@ En esta prueba simplemente debemos abrir las páginas https creadas en la subnet
 
 ### Resultados 
 
-
+![Resultado 3](aws-maquine.jpg)
 
 # Recomendaciones y conclusiones
 
@@ -178,12 +193,16 @@ Recomendación en cualquier ámbito, como la comprobación de las versiones de l
 
 El proceso de desarrollo de este proyecto ha proporcionado una valiosa serie de lecciones y recomendaciones que son esenciales para abordar de manera efectiva tareas similares en el futuro. A través de los desafíos y logros experimentados, hemos fortalecido nuestro enfoque hacia la planificación, la implementación y la solución de problemas en distintas etapas del proyecto. A continuación, se resumen las conclusiones clave extraídas de este proceso:
 
-1. La compatibilidad entre las distintas versiones de aplicaciones y dependencias es crucial. Los problemas que enfrentamos durante la instalación de dependencias de Asterisk resaltan la importancia de verificar las compatibilidades antes de proceder con cualquier acción. Además, la elección de la plataforma a utilizar también es de impacto para el proyecto.
-2. Es bueno ir lento porque precisa. Es mejor comprender correctamente el proyecto a querer terminarlo todo de una vez sin saber qué es lo que se está haciendo.Y en equipos grandes, la comunicación efectiva y la distribución adecuada de tareas son esenciales para garantizar que todos los miembros del equipo estén alineados en la comprensión del proyecto y su alcance.
-
-En resumen, aunque no se alcanzó la finalización exitosa del proyecto, los desafíos enfrentados y las soluciones propuestas han proporcionado un valioso aprendizaje que puede ser aplicado en futuros proyectos. El entendimiento de la importancia de la compatibilidad, la elección de herramientas adecuadas, la planificación sólida y la colaboración efectiva son pilares fundamentales para abordar proyectos de manera exitosa en el futuro.
-
-
+1. Es bueno ir lento porque precisa: Es mejor comprender correctamente el proyecto a querer terminarlo todo de una vez sin saber qué es lo que se está haciendo.
+2. Compatibilidad y versiones: La compatibilidad entre las distintas versiones de aplicaciones y dependencias es crucial. Los problemas que enfrentamos durante la instalación de dependencias de Asterisk resaltan la importancia de verificar las compatibilidades antes de proceder con cualquier acción.
+3. Herramientas para la Gestión: El uso de herramientas específicas, como "chocolatey" en Windows o "HashiCorp Terraform" en Visual Studio Code, puede simplificar en gran medida la instalación y la administración de aplicaciones y recursos.
+4. Administración de Claves: La correcta identificación y uso de las claves, tanto públicas como privadas, es esencial para evitar problemas futuros durante la configuración de conexiones seguras.
+5. Backup y Versionado: La creación de imágenes de máquina virtual para guardar versiones seguras del trabajo realizado es esencial para revertir cambios en caso de errores o problemas imprevistos.
+6. Elección de Plataforma: Basándonos en la experiencia, el uso de Linux demostró ser más adecuado para la instalación de dependencias y herramientas necesarias en comparación con Windows, lo que respalda la recomendación de optar por Linux en proyectos similares.
+7. Automatización Gradual: Al llevar a cabo tareas de automatización, es recomendable comenzar con un alcance pequeño y ampliarlo gradualmente. Esto proporciona mayor claridad y seguridad en la implementación y evita abordar problemas complejos de manera prematura.
+8. Control de Costos: Mantener un control riguroso sobre los recursos activos es fundamental para evitar gastos no previstos. Se recomienda desactivar o eliminar máquinas virtuales y recursos una vez finalizadas las pruebas.
+9. Comunicación y Distribución de Tareas: En equipos grandes, la comunicación efectiva y la distribución adecuada de tareas son esenciales para garantizar que todos los miembros del equipo estén alineados en la comprensión del proyecto y su alcance.
+10. Consultas: Si se tiene la posibilidad de realizar consultas a una persona de confianza, es mejor hacerlo. No es buena idea quedarse con las dudas por miedo o por sentir que todo lo puede hacer uno solo.
 
 
 # Referencias Bibliográficas
