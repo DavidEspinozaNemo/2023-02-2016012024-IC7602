@@ -5,6 +5,8 @@ execute 'asterisk' do
   execute 'apache' do
     command 'sudo apt update'
     command 'sudo apt install apache2'
+    command 'sudo a2ensite 000-default.conf'
+    command 'service apache2 reload'
   end
 
   file '/var/www/html/index.html' do
