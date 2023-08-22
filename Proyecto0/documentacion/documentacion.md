@@ -163,16 +163,26 @@ En esta prueba simplemente debemos abrir las páginas https creadas en la subnet
 
 # Recomendaciones y conclusiones
 
-( x10 )
 Recomendación en cualquier ámbito, como la comprobación de las versiones de las aplicaciones.
 
-Durante la fase de instalación nos topamos con errores que no permitían instalar las dependencias de Asterisk, resulta que las versiones eran incompatibles. Teníamos por defecto la versión 8.0 de php cuando para las dependencias de Asterisk se necesitaba la versión 5.2, así que tuvimos que reinstalar php y otras dependencias. Se recomienda revisar las compatibilidades a la hora de llevar a cabo dichas acciones.
-Si durante la instalación de las aplicaciones necesarias surgen errores en Windows, se recomienda utilizar “chocolatey”, que es un administrador de paquetes de Windows de línea de comandos. Esta recomendación viene de errores que surgieron durante la instalación del proyecto en un computador específico.
-Para facilitar el uso de terraform instalar la extensión de Visual Studio Code llamada “HashiCorp Terraform”.
-Hay que utilizar la clave con la extensión .pub que es la pública, si se crea con la llave privada AWS tirar un error, a la hora de crear la conexión. Se recomienda tener bien identificadas desde el principio dichas claves pues por experiencia propia esto puede generar problemas a futuro.
-Realizar una imagen de la máquina virtual para guardar versiones de lo trabajado y volver a una segura si se comete algún error.
-Al hacer uso de Windows se complicó significativamente el progreso con respecto a las instalaciones de dependencias y herramientas necesarias para el proyecto. Sin embargo, haciendo uso de Linux el caso fue diferente, es por ello que se recomienda evitar utilizar Windows para este proyecto.
-En las recetas de Chef cuando se ingresan comandos se puede presentar errores debido a que se necesita la aprobación de una instalación (por ejemplo)
+1. Durante la fase de instalación nos topamos con errores que no permitían instalar las dependencias de Asterisk, resulta que las versiones eran incompatibles. Teníamos por defecto la versión 8.0 de php cuando para las dependencias de Asterisk se necesitaba la versión 5.2, así que tuvimos que reinstalar php y otras dependencias. Se recomienda revisar las compatibilidades a la hora de llevar a cabo dichas acciones.
+2. Si durante la instalación de las aplicaciones necesarias surgen errores en Windows, se recomienda utilizar “chocolatey”, que es un administrador de paquetes de Windows de línea de comandos. Esta recomendación viene de errores que surgieron durante la instalación del proyecto en un computador específico.
+3. Para facilitar el uso de terraform instalar la extensión de Visual Studio Code llamada “HashiCorp Terraform”.
+4. Hay que utilizar la clave con la extensión .pub que es la pública, si se crea con la llave privada AWS tirar un error, a la hora de crear la conexión. Se recomienda tener bien identificadas desde el principio dichas claves pues por experiencia propia esto puede generar problemas a futuro.
+5. Realizar una imagen de la máquina virtual para guardar versiones de lo trabajado y volver a una segura si se comete algún error.
+6. Al hacer uso de Windows se complicó significativamente el progreso con respecto a las instalaciones de dependencias y herramientas necesarias para el proyecto. Sin embargo, haciendo uso de Linux el caso fue diferente, es por ello que se recomienda evitar utilizar Windows para este proyecto.
+7. En las recetas de Chef cuando se ingresan comandos se presentaron errores debido a que se necesitaba la aprobación de una instalación (por ejemplo), es por ello que se recomienda que en los comandos donde es necesario se agregue -y al final. De esta manera se aprueba automáticamente y no da problemas.
+8. Se recomienda siempre eliminar o no dejar activa la máquina una vez terminadas las pruebas porque se gasta créditos y pueden llegar a cobrarnos dinero que no planeábamos gastar. Esto se recomienda a base de experiencia, pues se nos olvidó después de unas pruebas y si bien nos dimos cuenta a tiempo el aumento que se vio era significativo.
+9. Se presentaron dificultades a la hora de realizar la automatización de Chef. Se recomienda que a la hora de elaborar la receta se comience con un conjunto pequeño para luego ir ampliando gradualmente para así tener mayor claridad y seguridad de haber abarcado lo necesario.
+10. Se recomienda una buena comunicación si el equipo es grande y no dividir las asignaciones, esto debido a que los demás miembros se pueden quedar perdidos en la comprensión de ciertas áreas.
+
+El proceso de desarrollo de este proyecto ha proporcionado una valiosa serie de lecciones y recomendaciones que son esenciales para abordar de manera efectiva tareas similares en el futuro. A través de los desafíos y logros experimentados, hemos fortalecido nuestro enfoque hacia la planificación, la implementación y la solución de problemas en distintas etapas del proyecto. A continuación, se resumen las conclusiones clave extraídas de este proceso:
+
+1. La compatibilidad entre las distintas versiones de aplicaciones y dependencias es crucial. Los problemas que enfrentamos durante la instalación de dependencias de Asterisk resaltan la importancia de verificar las compatibilidades antes de proceder con cualquier acción. Además, la elección de la plataforma a utilizar también es de impacto para el proyecto.
+2. Es bueno ir lento porque precisa. Es mejor comprender correctamente el proyecto a querer terminarlo todo de una vez sin saber qué es lo que se está haciendo.Y en equipos grandes, la comunicación efectiva y la distribución adecuada de tareas son esenciales para garantizar que todos los miembros del equipo estén alineados en la comprensión del proyecto y su alcance.
+
+En resumen, aunque no se alcanzó la finalización exitosa del proyecto, los desafíos enfrentados y las soluciones propuestas han proporcionado un valioso aprendizaje que puede ser aplicado en futuros proyectos. El entendimiento de la importancia de la compatibilidad, la elección de herramientas adecuadas, la planificación sólida y la colaboración efectiva son pilares fundamentales para abordar proyectos de manera exitosa en el futuro.
+
 
 
 
