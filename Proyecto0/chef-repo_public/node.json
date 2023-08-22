@@ -1,0 +1,6 @@
+{ 
+	   "run_list": [ "recipe[asterisk-pbx-apache-server::InitServer]" ] ,
+	      	"attr": {
+					"gateway": "20.120.97.50"
+						}
+} 

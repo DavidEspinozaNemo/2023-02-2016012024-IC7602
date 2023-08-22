@@ -1,6 +1,0 @@
-{ 
-	   "run_list": [ "recipe[test::basic_site]" ] ,
-	      	"attr": {
-					"gateway": "20.120.97.50"
-						}
-} 
