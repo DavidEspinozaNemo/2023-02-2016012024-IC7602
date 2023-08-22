@@ -1,12 +1,12 @@
 ![Image del logo del Tec](logo-tec.jpg)
 
-**Escuela de Ingeniería en Computación **
+# Escuela de Ingeniería en Computación
 
-**Proyecto opcional** 
+## Proyecto opcional 
 
-**Redes** 
+### Redes
 
-Profesor: Gerardo Nereo Campos Araya
+Profesor: **Gerardo Nereo Campos Araya**
 
 Estudiantes:
 
@@ -27,9 +27,12 @@ Fecha de entrega: Martes 22 de agosto del 2023
 
 # Introducción
 
-​	En los tiempos actuales la automatización  y la gestión eficiente son fundamentales. Este proyecto implementa tecnologías de automatización de infraestructura y administración de configuración. 
+​	En los tiempos actuales la automatización  y la gestión eficiente son fundamentales. Este proyecto implementa tecnologías de automatización de infraestructura y administración de configuración.
+
 ​	El presente trabajo se enfoca en la creación y configuración de una red virtual funcional que consta de dos subredes. Se establece una red pública, accesible desde Internet, y una red privada, que permite acceso a Internet, pero no es accesible directamente desde la red global. Para garantizar la seguridad y el control del tráfico, se implementará un dispositivo de Traducción de Direcciones de Red (NAT) en la red privada.
+
 ​	La implementación de la infraestructura se lleva a cabo utilizando la herramienta Terraform, que permite definir y desplegar la infraestructura como código (IaC). Aunque el proyecto hace uso de Amazon Web Services (AWS). El proyecto se sumerge en la instalación automatizada de las tecnologías Asterisk y FreePBX, que se utilizan en la creación de centrales telefónicas modernas. Se automatizan estas instalaciones mediante la herramienta Chef y se realizan llamadas a través de clientes de SIP compatibles con dispositivos móviles.
+
 ​	Además, se implementan servidores Apache, ampliamente reconocidos para el alojamiento de sitios web basados en el protocolo HTTP. Se configuran dichos servidores en ambas redes, generando páginas HTML sencillas que denotan su funcionalidad. Al igual que en las secciones anteriores, se prioriza la automatización de estas instalaciones utilizando herramientas de administración de configuración.
 
 # Explicación de cada sub parte (AWS, Asterisk, Http server)
@@ -37,12 +40,15 @@ Fecha de entrega: Martes 22 de agosto del 2023
 
 ## Implementación en AWS (Amazon Web Services)
 ​	Se utiliza Amazon Web Services (AWS) para crear y configurar una red virtual. Utilizando la herramienta Terraform, se definen y despliegan las infraestructuras como código, lo que permite la creación de redes públicas y privadas con subredes.
+
 La implementación en AWS proporciona una base sólida para entender los conceptos fundamentales de la nube, la gestión de recursos y la automatización de infraestructura.
 
 ## Configuración de Asterisk y FreePBX
 
 ​	En esta segunda parte del proyecto,se trabaja con Asterisk y FreePBX. Estas herramientas permiten el desarrollo de centrales telefónicas, aprovechando el protocolo de capa de sesión SIP y el protocolo de transporte UDP.
+
 ​	Se automatiza la instalación y configuración de Asterisk y FreePBX utilizando la herramienta Chef. De esta manera se facilita la implementación y ayuda a comprender cómo se pueden administrar sistemas y aplicaciones de manera eficiente. Se crean extensiones SIP y se permite realizar llamadas a través de clientes compatibles con dispositivos móviles. 
+
 ​	Es de esta manera que se permite experimentar y entender el funcionamiento de la telefonía IP en un entorno controlado.
 
 ## Configuración de Servidores HTTP (Apache Server)
@@ -51,11 +57,11 @@ La implementación en AWS proporciona una base sólida para entender los concept
 
 # Diagramas de arquitectura
 
-xximagenxx
+![Diagrama de arquitectura](diagrama-arq.jpg)
 
 # Diagramas de flujo
 
-xxiamgenxx
+![Diagrama de flujo](diagrama-flujo.jpg)
 
 # Instrucciones de Ejecución
 
@@ -63,11 +69,11 @@ xxiamgenxx
 
 ​	Para este proyecto el código utilizado se ejecuta en consola, se hace uso de la herramienta Visual Studio Code para tener acceso a la extensión AWS ToolKit for VS Code. Se recomienda hacer uso de estas mismas herramientas para la ejecución del mismo.
 
-xximagenxx
+![AWS Toolkit](aws-toolkit.jpg)
 
 ​	En la extensión de AWS se colocan las siguientes credenciales que pertenecen al compañero Ángel (esto debido a que estamos utilizando únicamente la credencial de esta persona).
 
-xximagenxx
+![Extención de llave](key-extension.jpg)
 
 ​	Para poder hacer uso de este proyecto es necesario tener instalada la herramienta Terraform en su última versión.
 
@@ -78,23 +84,36 @@ xximagenxx
 ​	Esto crea la infraestructura y se puede crear una conexión por ssh a la máquina virtual.
 
 ​	Para conectarse mediante ssh es necesario utilizar el mainkey en el root del usuario.
+
 ​	Si no se cuenta con un key se puede crear uno nuevo.
+
 ​	Este mainkey tiene que ser agregado a la instancia de AWS donde se va a realizar la conexión por ssh.
+
 ​	Luego se actualiza la infraestructura de nuevo con: terraform apply -auto-approve
+
 ​	Una vez guardado el mainkey se puede utilizar el comando: ssh -i ~/.ssh/[nombre del archivo de la clave privada] ubuntu@[ip/dns de la instancia pública] para conectarse a la instancia pública.
+
 ​	Una vez establecida la conexión con la máquina virtual de la instancia pública es posible ejecutar comandos de linux sobre esta consola que afectan la máquina virtual.
+
 ​	Como las máquinas virtuales son creadas con un imagen que ya tiene instalados con los programas necesarios, solo se debe de hacer un pull del repositorio de github que guarda los repositorios de chef. 
+
 Sobre el root se ejecuta el comando: git clone https://github.com/DavidEspinozaNemo/2023-02-2016012024-IC7602.git.
+
 ​	Una vez descargado el repositorio se accede al repositorio de chef público con: cd 2023-02-2016012024-IC7602/Proyecto0/chef-repo_public
+
 ​	Una vez dentro del chef repo público se va a ejecutar el comando: sudo chef-solo -c solo.rb -j node.json. 	Esto lo que causa es que el runlist del chef de repo se ejecute, iniciando los servicios de asterisk, apache server y pbx en la instancia pública.
+
 ​	Después de haberse ejecutado el chef en la instancia pública se va a hacer una conexión ssh desde la instancia de la red pública a la de la privada. Utilizando el comando ssh -i ~/.ssh/[nombre del key].crash ubuntu@[ip de la máquina privada].
+
 ​	Una vez conectado a la instancia de la maquina virtual de la red privada se clona el repositorio en esta maquina utilizando el comando: git clone https://github.com/DavidEspinozaNemo/2023-02-2016012024-IC7602.git.
+
 ​	Una vez descargado el repositorio se accede al repositorio de chef privado con: cd 2023-02-2016012024-IC7602/Proyecto0/chef-private
 ​	Ya dentro del repositorio de chef privado se ejecuta el comando: sudo chef-solo -c solo.rb -j node.json. Lo que ejecuta el runlist del chef repo
 
 # Pruebas Unitarias 
 
 ​	A continuación, se presenta un resumen conciso de algunas pruebas unitarias llevadas a cabo en el proyecto, detallando el nombre de cada prueba, una breve descripción de su propósito y los resultados obtenidos tras su ejecución.
+
 ## Prueba 01: Conectividad entre usuarios SIP
 
 ​	Una vez teniendo el servidor FreePBX funcionando debemos realizar una prueba de conectividad entre dos clientes SIP, la prueba consiste en crear un cliente en una máquina virtual y llamar a otro cliente a través del servicio almacenado en AWS.
@@ -120,7 +139,7 @@ Sobre el root se ejecuta el comando: git clone https://github.com/DavidEspinozaN
 
 ​	No pudimos concretar la llamada.
 
-xxiamgenxx
+![Resultado 1](call-no-found.jpg)
 
 ## Prueba 02: Inicialización de las páginas Http
 
