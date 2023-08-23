@@ -57,9 +57,13 @@ La implementación en AWS proporciona una base sólida para entender los concept
 
 # Diagramas de arquitectura
 
+A continuación se muestra el diagrama de arquitectura.
+
 ![Diagrama de arquitectura](diagrama-arq.jpg)
 
 # Diagramas de flujo
+
+A continuación se muestra el diagrama de flujo.
 
 ![Diagrama de flujo](diagrama-flujo.jpg)
 
@@ -174,21 +178,35 @@ Finalmente, la creación de la instancia privada solamente requiere de una image
 
 La prueba fue aprobada, como se puede visualizar en los siguientes recursos visuales, se desplegó y configuró de manera correcta el servidor.
 
-## Prueba 03: Configuraciones de la máquina virtual en AWS
+## Prueba 03: Creación de la infraestructura en AWS
 
 La tercera y última prueba se basa en la creación de las dos instancias (máquinas virtuales) en el servicio de AWS, para este proceso se utilizó Terraform y se siguieron una serie de pasos que se pueden ver a detalle a continuación.
 
-### Pasos de la creación
-
 Inicialmente, la primera acción fue crear y configurar adecuadamente una cuenta dentro de los servicios de AWS, recolectando la información más relevante dentro de un archivo (claves de acceso SSH, usuario, contraseña, dirección).
 
-Seguidamente, se inició con el uso de terraform que es la herramienta que utilizamos para definir y administrar nuestra infraestructura como código. Para su instalación se utilizó el comando *brew* para el caso de Linux y *choco* en el caso de Windows.
+Seguidamente, se inició con el uso de terraform que es la herramienta que utilizamos para definir y administrar nuestra infraestructura como código. Para su instalación se utilizó el comando *brew* para el caso de Linux y Choco en el caso de Windows.
 
 Una vez instalado y con el ambiente funcional se procedió a crear el archivo .tf en el cual se definió la infraestructura del servicio, el proveedor de AWS y se definió la instancia. 
 
 Al finalizar su creación se ejecutan una serie de comandos donde se inicializa un proyecto de terraform, se ve la vista previa del servicio y finalmente se ejecuta con *apply*.
 
 Realizado todo el proceso se puede ingresar al sitio web de AWS y comprobar que el ambiente fue creado con éxito.
+
+Los resultados de esta prueba fueron exitosos y por medio de las evidencias disponibles más adelante se puede visualizar como fueron creadas las instancias por medio de Terraform y con el servicio de nube de Amazon AWS.
+
+Paso 4: Definición del Proveedor de AWS
+
+![captura 1](public_instance_created.jpg)
+
+![captura 2](others_components_created.jpg)
+
+![captura 3](others_components_created2.jpg)
+
+![captura 4](others_components_created3.jpg)
+
+![captura 5](others_components_created4.jpg)
+
+![captura 6](others_components_created5.jpg)
 
 ### Resultados 
 
