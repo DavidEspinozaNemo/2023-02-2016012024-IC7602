@@ -127,7 +127,7 @@ La implementación en AWS proporciona una base sólida para entender los concept
 
 # Pruebas Unitarias 
 
-​	A continuación, se presenta un resumen conciso de algunas pruebas unitarias llevadas a cabo en el proyecto, detallando el nombre de cada prueba, una breve descripción de su propósito y los resultados obtenidos tras su ejecución.
+​	A continuación, se presenta un resumen conciso de las tres pruebas unitarias llevadas a cabo en el proyecto, detallando el nombre de cada prueba, una breve descripción de su propósito y los resultados obtenidos tras su ejecución.
 
 ## Prueba 01: Conectividad entre usuarios SIP
 
@@ -158,21 +158,41 @@ La implementación en AWS proporciona una base sólida para entender los concept
 
 ## Prueba 02: Inicialización de las páginas Http
 
-En esta prueba simplemente debemos abrir las páginas https creadas en la subnet pública y en la subnet privada para comprobar si hay errores en su ejecución. Comprobar que el acceso por hacia la pública se pueda realizar por medio de internet y el acceso de la segunda sólo sea posible a través de la subnet pública.
+Para la segunda prueba, se realizó una verificación de las páginas web generadas en las subredes pública y privada mediante el acceso a través de protocolo HTTPS. El propósito es identificar posibles irregularidades en la ejecución. Es imperativo confirmar que el acceso a la subred pública pueda llevarse a cabo utilizando la infraestructura de internet, mientras que el acceso a la segunda subred esté restringido exclusivamente a través de la subred pública.
 
 ### Pasos de la creación
 
+En primera instancia, se realizó un proceso de descarga y configuración de Asterisk , FreePBX y Chef, para este se presentaron múltiples errores lo cuales se buscaron solucionar con la ayuda del profesor por medio de una reunión realizada con él el día 15 de agosto. Además se siguieron los pasos suministrados por la documentación oficial de los respectivos sitios.
+
+Seguidamente, para la creación de la primera subnet se creó una instancia en AWS con las “golden image” creadas en el paso anterior y se realizó una receta con la herramienta Chef la cual se encargaba de llevar a cabo la descarga de apache y  montar el servidor 1 (público) sobre la máquina virtual de AWS.
+
+Nota: Recordar que esta primera subnet es accesible por medio de internet por lo cual solo se debe de buscar la dirección ip pública en el navegador de preferencia.
+
+Finalmente, la creación de la instancia privada solamente requiere de una imagen con los paquetes de chef ya que esta no necesita ni el Asterisk ni el FreePBX, de igual forma se ejecuta una receta por medio de la herramienta chef con la cual se instala apache y se configura el servidor 2.
+
 ### Resultados 
+
+La prueba fue aprobada, como se puede visualizar en los siguientes recursos visuales, se desplegó y configuró de manera correcta el servidor.
 
 ## Prueba 03: Configuraciones de la máquina virtual en AWS
 
-…
+La tercera y última prueba se basa en la creación de las dos instancias (máquinas virtuales) en el servicio de AWS, para este proceso se utilizó Terraform y se siguieron una serie de pasos que se pueden ver a detalle a continuación.
 
 ### Pasos de la creación
 
+Inicialmente, la primera acción fue crear y configurar adecuadamente una cuenta dentro de los servicios de AWS, recolectando la información más relevante dentro de un archivo (claves de acceso SSH, usuario, contraseña, dirección).
 
+Seguidamente, se inició con el uso de terraform que es la herramienta que utilizamos para definir y administrar nuestra infraestructura como código. Para su instalación se utilizó el comando *brew* para el caso de Linux y *choco* en el caso de Windows.
+
+Una vez instalado y con el ambiente funcional se procedió a crear el archivo .tf en el cual se definió la infraestructura del servicio, el proveedor de AWS y se definió la instancia. 
+
+Al finalizar su creación se ejecutan una serie de comandos donde se inicializa un proyecto de terraform, se ve la vista previa del servicio y finalmente se ejecuta con *apply*.
+
+Realizado todo el proceso se puede ingresar al sitio web de AWS y comprobar que el ambiente fue creado con éxito.
 
 ### Resultados 
+
+Los resultados de esta prueba fueron exitosos y por medio de las evidencias disponibles más adelante se puede visualizar como fueron creadas las instancias por medio de Terraform y con el servicio de nube de Amazon AWS.
 
 ![Resultado 3](aws-maquine.jpg)
 
