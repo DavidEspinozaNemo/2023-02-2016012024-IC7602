@@ -1,65 +1,43 @@
-# Primera prueba para la implementación de los graficos dinamicos y ajustados a los datos de audio.
+# Primera prueba para la implementación de los graficos  ajustados a los datos del audio.
 # Algunos de los pasos son solamente recreados o simulados, el principal objetivo es probar la funcionalidad de los graficos 
 
-import threading
-import pickle
+import soundfile as sf
 import numpy as np
 import matplotlib.pyplot as plt
-import sounddevice as sd
-from scipy import fft
-from matplotlib.animation import FuncAnimation
 
-# Cargar el archivo .atm
-with open('archivo.atm', 'rb') as file:
-    data = pickle.load(file)
+# Ruta al archivo WAV
+wav_file = './TareasCortas/TareaCorta1/WavFiles/mixkit-fast-rocket-whoosh-1714.wav'
 
-audio_data = data['audio']
-time_data = data['time_data']
-freq_data = data['freq_data']
+# Leer el archivo WAV usando soundfile
+wav_array, sample_rate = sf.read(wav_file)
 
-# Configuración de la gráfica
-fig, (ax1, ax2) = plt.subplots(2, 1)
-line1, = ax1.plot([], [])
-line2, = ax2.plot([], [])
-ax1.set_xlim(0, len(audio_data))
-ax2.set_xlim(0, len(freq_data)//2)
+# Crear el tiempo para el eje x
+time = np.linspace(0, len(wav_array) / sample_rate, num=len(wav_array))
 
-# Inicializar el grafico
-def init():
-    line1.set_data([], [])
-    line2.set_data([], [])
-    return line1, line2
+# Graficar la señal en el dominio del tiempo
+plt.figure(figsize=(12, 6))
 
-def update(frame):
-    line1.set_data(np.arange(len(time_data)), time_data)
-    line2.set_data(np.linspace(0, len(freq_data)//2, len(freq_data)//2), freq_data)
-    return line1, line2
+# Gráfica en el dominio del tiempo
+plt.subplot(2, 1, 1)
+plt.plot(time, wav_array)
+plt.xlabel('Time (s)')
+plt.ylabel('Amplitude')
+plt.title('Waveform in Time Domain')
+plt.grid(True)
 
-ani = FuncAnimation(fig, update, frames=range(len(audio_data)),
-                    init_func=init, blit=True, interval=100)
 
-# Controlar la reproducción
-def play_audio():
-    sd.play(audio_data, fs)
-    sd.wait()
+# Calcular la Transformada de Fourier
+freq = 1
+amplitude = 1
 
-def pause_audio():
-    sd.stop()
-
-play_thread = threading.Thread(target=play_audio)
-pause_thread = threading.Thread(target=pause_audio)
-
-# Botones de control
-play_button = plt.Button(ax1, 'Play', color='lightgoldenrodyellow')
-pause_button = plt.Button(ax1, 'Pause', color='lightgoldenrodyellow')
-
-def play(event):
-    play_thread.start()
-
-def pause(event):
-    pause_thread.start()
-
-play_button.on_clicked(play)
-pause_button.on_clicked(pause)
+# Gráfica en el dominio de la frecuencia
+'''plt.subplot(2, 1, 2)
+plt.plot(freq, amplitude)
+plt.xlabel('Frequency (Hz)')
+plt.ylabel('Amplitude')
+plt.title('Frequency Domain')
+plt.grid(True)
+plt.tight_layout()
+'''
 
 plt.show()
