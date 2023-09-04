@@ -54,6 +54,7 @@ def load(audioFileName):
     print(f"Loaded {fileFormat} file: {atmPath}{fileFormat}\n data: {data}")
     return data
 
-
+#Save para crear un nuevo archivo.
 #save("xd","lmao",60,"ElTest2")
+#Load para cargar un archivo existente.
 #load("ElTest2")
