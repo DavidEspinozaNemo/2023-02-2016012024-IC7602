@@ -56,4 +56,4 @@ def load(audioFileName):
 
 
 #save("xd","lmao",60,"ElTest2")
-load("ElTest2")
+#load("ElTest2")
