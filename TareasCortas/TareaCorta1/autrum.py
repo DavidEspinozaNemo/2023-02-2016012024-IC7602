@@ -7,7 +7,8 @@ import pyaudio
 import wave
 import threading
 import os
-from tkinter import StringVar, Label, Entry, messagebox
+from tkinter import StringVar, Label, Button, Entry, messagebox
+from tkinter import filedialog
 
 class InterfazApp:
     def __init__(self, root):
@@ -39,7 +40,7 @@ class InterfazApp:
         # CONTADOR DE TIEMPO
         self.time = Label(self.root, fg='green', width=20, text="0:00:00", bg="black", font=("", "30"))
         self.time.grid(row=4, column=0)
-        self.root.geometry("488x97")
+        self.root.geometry("1200x500")
 
         # BOTONES
         self.btnIniciar = ttk.Button(self.root, text='Grabar', command=self.iniciar_grabadora)
@@ -153,7 +154,7 @@ class InterfazApp:
         self.hilo_grabacion.start()
 
         # Actualizar la interfaz, deshabilitar el botón de inicio, habilitar el de detener
-        self.bloqueo("disabled")
+        #self.bloqueo("disabled")
 
     def grabar_audio(self, archivo):
         while self.grabando:
@@ -259,7 +260,7 @@ class InterfazApp:
         return c
 
     def cuenta(self):
-        self.time_text = str(self.contador1) + ":" + self.formato(self.contador2) + ":" + self.formato(self.contador)
+        self.time_text = str(self.contador1) + ":" + str(self.formato(self.contador2)) + ":" + str(self.formato(self.contador))
         self.contador += 1
         if self.contador == 60:
             self.contador = 0
