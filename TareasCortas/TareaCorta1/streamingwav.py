@@ -2,7 +2,8 @@
    os para operaciones en directorios, wave para trabajar con archivos de audio WAV, threading para la ejecución concurrente 
    de funciones y glob para buscar archivos que coincidan con un patrón."""
 
-from tkinter import Tk, Label, Button, filedialog, Entry, StringVar, messagebox
+#from tkinter import Tk, Label, Button, filedialog, Entry, StringVar, messagebox
+from tkinter import filedialog, StringVar, messagebox
 import glob
 import pyaudio
 import os
@@ -131,7 +132,7 @@ def parar():
         clear_contador()
     elif reproduciendo == True:
         reproduciendo = False
-    bloqueo('normal')
+    #bloqueo('normal')
 
 """La función direc se activa cuando se presiona el botón "Carpeta". Abre un cuadro de diálogo de carpeta para
    permitir al usuario elegir un directorio. Si se selecciona un directorio, cambia el directorio de trabajo actual y 
@@ -196,6 +197,7 @@ def pausar():
 """configura la ventana de la GUI utilizando Tkinter, inicializa las variables necesarias, crea botones, etiquetas y 
    la visualización del directorio actual, y comienza el bucle de eventos principal con ventana.mainloop()"""
 
+"""
 # CREAR VENTANA
 ventana = Tk()
 ventana.title('Grabadora Audio WAV')
@@ -236,3 +238,4 @@ etDir.place(x=10, y=0)
 dire()
 
 ventana.mainloop()
+"""
