@@ -9,6 +9,7 @@ import threading
 import scipy.fft
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.animation import FuncAnimation
+import atm
 
 ventana = Tk()
 ventana.title('Grabadora Audio WAV')
@@ -77,25 +78,34 @@ def abrir():
     global f
     global reproduciendo
     clear_contador()
-    audio = pyaudio.PyAudio()
     open_archive = filedialog.askopenfilename(initialdir="/",
-                 title="Seleccione archivo", filetypes=(("mp3 files", "*.mp3"),
+                 title="Seleccione archivo", filetypes=(("atm", "*.atm"),
                  ("all files", "*.*")))
     if open_archive != "":
         try:
             reproduciendo = True
-            f = wave.open(open_archive, "rb")
+
+            #Insert atm load code.
+            atmData, tempWAV = atm.load(open_archive)
+
+            audio = pyaudio.PyAudio()
+            f = wave.open(tempWAV, "rb")
             stream = audio.open(format=audio.get_format_from_width(f.getsampwidth()),  
-                        channels=f.getnchannels(),  
-                        rate=f.getframerate(),
-                        output=True)
+                channels=f.getnchannels(),  
+                rate=f.getframerate(),
+                output=True)
             data = f.readframes(CHUNK)
+
             bloqueo('disabled')
             t = threading.Thread(target=cuenta)
             t.start()
             t2 = threading.Thread(target=reproduce)
             t2.start()
-        except:
+        except Exception as e:
+            if hasattr(e, 'message'):
+                messagebox.showwarning("ERROR", e.message)
+            else:
+                messagebox.showwarning("ERROR", e)
             messagebox.showwarning("ERROR", "No se pudo abrir el archivo especificado")
             reproduciendo = False
 """La función reproduce se encarga de reproducir el archivo de audio seleccionado. Escribe continuamente datos de audio 
@@ -228,13 +238,16 @@ def grabacion(FORMAT, CHANNELS, RATE, CHUNK, audio, archivo):
 
     grabs = glob.glob('*.*')
 
-    # CREAR/GUARDAR EL ARCHIVO DE AUDIO EN FORMATO WAV
+    # CREAR/GUARDAR EL ARCHIVO DE AUDIO EN FORMATO ATM
     count = 0
     for i in grabs:
         if "grabacion" in i:
             count += 1
+    
+    nombreDeArchivo = "grabacion" + "(" + str(count) + ")"
+
     if count > 0:
-        archivo = "grabacion" + "(" + str(count) + ")" + ".wav"  # Cambiamos la extensión a WAV
+        archivo = nombreDeArchivo + ".wav"  # Cambiamos la extensión a WAV
 
     wf = wave.open(archivo, 'wb')
     wf.setnchannels(CHANNELS)
@@ -242,6 +255,20 @@ def grabacion(FORMAT, CHANNELS, RATE, CHUNK, audio, archivo):
     wf.setframerate(RATE)
     wf.writeframes(b''.join(frames))
     wf.close()
+
+    '''
+DATA EXAMPLE
+    #Save audio data in a dicctionary
+    data = {
+        "audioData" : audioData,
+        "fourierData" : fourierData,
+        "audioFrecuency" : audioFrecuency
+    }
+'''
+
+    #TODO: Implementar los datos y el fourier.
+    atm.save("Dummy Data",archivo,os.getcwd(),nombreDeArchivo)
+
 
 
 

@@ -1,12 +1,17 @@
 import json
 import shutil
 import os
+import tempfile
+import wave
 import zipfile
+
+import pyaudio
 
 #folderPathATM = "TareasCortas/TareaCorta1/ATMFiles"
 fileFormat = ".atm"
 compressionFormat = "zip"
-jsonFileName = 'dataATM.json'
+jsonFileName = 'data.json'
+CHUNK = 1024
 
 '''
 DATA EXAMPLE
@@ -28,10 +33,11 @@ def save(data,audioSourcePath,ATMSavePath,audioFileName):
     os.makedirs(atmPath)
 
     #Move audio to new path
-    shutil.move(audioSourcePath+"/"+audioFileName, atmPath)
+    shutil.move(audioSourcePath, atmPath)
 
     with open(atmPath+'/'+jsonFileName, 'w') as file:
         json.dump(data, file, ensure_ascii=False, indent=4)
+        file.close()
 
     #Create zip file and add atm extension
     shutil.make_archive(atmPath,compressionFormat,atmPath)
@@ -44,18 +50,27 @@ def load(filePath):
     #Change name to zip to unzip file.
     zipPath = filePath.replace(fileFormat,"."+compressionFormat)
     os.rename(filePath , zipPath)
-
     #Open zip file and json file
     with zipfile.ZipFile(zipPath, "r") as file:
+        nameList = file.namelist()
+        nameList.remove(jsonFileName)
+        tempWAV = tempfile.NamedTemporaryFile()
+        tempWAV.write(file.read(nameList[0]))
+        tempWAV.seek(0)
+
         with file.open(jsonFileName) as jsonFile:  
             utf = jsonFile.read()  
-            data = json.loads(utf) 
-    
+            atmData = json.loads(utf) 
+            jsonFile.close()
+        file.close()
+
     os.rename(zipPath,filePath)
-    print(f"Loaded {fileFormat} file: {filePath}\n data: {data}")
-    return data
+
+    print(f"Loaded {fileFormat} file: {filePath}\n data: {atmData}")
+
+    return atmData,tempWAV
 
 #Save para crear un nuevo archivo.
-#save("xd","lmao",60,"ElTest2")
+#save("xd","F:\GitHub\\2023-02-2016012024-IC7602\TareasCortas\TareaCorta1\WavFiles\grabacion.wav","F:\GitHub\\2023-02-2016012024-IC7602\TareasCortas\TareaCorta1\ATMFiles","grabacion")
 #Load para cargar un archivo existente.
-#load("ElTest2")
+#load("TareasCortas\TareaCorta1\ATMFiles\grabacion.atm")
