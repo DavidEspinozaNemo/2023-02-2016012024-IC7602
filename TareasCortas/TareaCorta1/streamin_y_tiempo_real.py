@@ -266,7 +266,7 @@ DATA EXAMPLE
     }
 '''
 
-    #TODO: Implementar los datos y el fourier.
+    #TODO: Implementar los datos y el fourier. Guardarlos en un diccionario.
     atm.save("Dummy Data",archivo,os.getcwd(),nombreDeArchivo)
 
 
