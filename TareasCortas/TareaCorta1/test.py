@@ -1,70 +1,59 @@
-import soundfile as sf
-import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
+import pyaudio as pa 
+import struct 
+import numpy as np
 
-# Ruta al archivo WAV
-wav_file = './TareasCortas/TareaCorta1/WavFiles/mixkit-fast-rocket-whoosh-1714.wav'
+FRAMES = 1024*8
+FORMAT = pa.paInt16
+CHANNELS = 1
+Fs = 44100
 
-# Leer el archivo WAV usando soundfile
-wav_array, sample_rate = sf.read(wav_file)
-t = np.linspace(0, len(wav_array) / sample_rate, len(wav_array))
-print("WavArray" , wav_array)
-print("Sample_rate", sample_rate)
-print("t : ", t)
+p = pa.PyAudio()
 
-# Crea una figura y un subplot para el dominio del tiempo
-fig, ax = plt.subplots()
-line, = ax.plot([], [])
-ax.set_xlim(0, len(wav_array) / sample_rate)  # Ajusta los límites del eje x
-ax.set_ylim(-1, 1)  # Ajusta los límites del eje y
-ax.set_xlabel('Tiempo (s)')
-ax.set_ylabel('Amplitud')
-ax.set_title('Señal en el Dominio del Tiempo')
+stream = p.open(
+    format=FORMAT,
+    channels=CHANNELS,
+    rate=Fs,
+    input=True,
+    output=True,
+    frames_per_buffer=FRAMES
+)
 
-# Función de inicialización para la animación
-def init():
-    line.set_data([], [])
-    return line,
+fig, (ax, ax1) = plt.subplots(2)
 
-# Función de actualización para la animación
-def update(frame):
-    x = t[:frame]
-    y = np.pad(x, (0, frame - len(x)), 'edge')
-    #print("x : ", x)
-    #print("y:  ", y)
-    line.set_data(x, y)
-    return line,
+x_audio = np.arange(0, FRAMES, 1)
+x_fft = np.linspace(0, Fs, FRAMES)
 
-'''
-# Genera algunos datos de prueba (en este caso, una onda senoidal)
-t = np.linspace(0, 10, 1000)  # Tiempo de 0 a 10 segundos
-data = np.sin(2 * np.pi * 1 * t)  # Una onda senoidal de 1 Hz
+line, = ax.plot(x_audio, np.random.rand(FRAMES), 'r')
+line_fft, = ax1.semilogx(x_fft, np.random.rand(FRAMES), 'b')
 
-# Crea una figura y un subplot para el dominio del tiempo
-fig, ax = plt.subplots()
-line, = ax.plot([], [])
-ax.set_xlim(0, 10)  # Ajusta los límites del eje x
-ax.set_ylim(-1, 1)  # Ajusta los límites del eje y
-ax.set_xlabel('Tiempo (s)')
-ax.set_ylabel('Amplitud')
-ax.set_title('Señal en el Dominio del Tiempo')
+ax.set_ylim(-32500, 32500)
+ax.set_xlim(0, FRAMES)
 
-# Función de inicialización para la animación
-def init():
-    line.set_data([], [])
-    return line,
+Fmin = 1
+Fmax = 5000
+ax1.set_xlim(Fmin, Fmax)
 
-# Función de actualización para la animación
-def update(frame):
-    x = t[:frame]
-    y = data[:frame]
-    line.set_data(x, y)
-    return line,
-'''
+fig.show()
 
-# Configura la animación
-ani = FuncAnimation(fig, update, frames=len(wav_array), init_func=init, blit=True)
+F = (Fs/FRAMES)*np.arange(0, FRAMES//2)
 
-# Muestra la animación
-plt.show()
+while True:
+    data = stream.read(FRAMES)
+    dataInt = struct.unpack(str(FRAMES) + 'h', data)
+    
+    line.set_ydata(dataInt)
+    
+    M_gk = abs(np.fft.fft(dataInt)/FRAMES)
+    
+    ax1.set_ylim(0, np.max(M_gk+10))
+    line_fft.set_ydata(M_gk)
+    
+    M_gk = M_gk[0:FRAMES//2]
+    Posm = np.where(M_gk == np.max(M_gk))
+    F_fund = F[Posm]
+    
+    print(int(F_fund))
+    
+    fig.canvas.draw()
+    fig.canvas.flush_events()
