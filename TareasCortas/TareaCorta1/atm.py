@@ -66,7 +66,7 @@ def load(filePath):
 
     os.rename(zipPath,filePath)
 
-    print(f"Loaded {fileFormat} file: {filePath}\n data: {atmData}")
+    print(f"Loaded {fileFormat} file: {filePath}\n")
 
     return atmData,tempWAV
 
