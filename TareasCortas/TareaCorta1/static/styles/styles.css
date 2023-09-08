@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
+
+body {
+  background-color: #f0f0f0; /* Color de fondo suave */
+  font-family: "Open Sans, sans-serif"; /* Fuente general para el texto */
+}
+
+.container-fluid {
+  max-width: 1200px;
+  margin: 0 auto; /* Centrar el contenedor */
+}
+
+.tool-bar {
+  display: flex;
+  justify-content: center; /* Espaciado entre los botones */
+  margin-bottom: 20px; /* Margen inferior para dar espacio antes de las gráficas */
+}
+
+.tool-bar .btn {
+  font-size: 16px; /* Tamaño de fuente para los botones */
+  font-family: "Nexa", "Open Sans", sans-serif;
+  border: none;
+  margin: 0 10px;
+  min-width: 120px;
+}
+
+/* Colores pastel para los botones con un tono más suave para hover */
+.tool-bar .btn-success {
+  background-color: #63a75b;
+  color: #fff;
+}
+.tool-bar .btn-success:hover {
+  background-color: #529749;
+}
+
+.tool-bar .btn-dark {
+  background-color: #6363a7;
+  color: #fff;
+}
+.tool-bar .btn-dark:hover {
+  background-color: #52528c;
+}
+
+.tool-bar .btn-danger {
+  background-color: #d25454;
+  color: #fff;
+}
+.tool-bar .btn-danger:hover {
+  background-color: #aa5555;
+}
+
+.time-domain-chart-wrapper,
+.frequency-domain-chart-wrapper {
+  border-radius: 15px; /* Bordes redondeados para los contenedores de las gráficas */
+  margin: 10px 0; /* Margen vertical para separar los elementos */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombreado suave para dar profundidad */
+}
+
+.time-domain-chart-wrapper {
+  border: 2px solid #d4c6e0; /* Color pastel suave para el borde */
+}
+
+.frequency-domain-chart-wrapper {
+  border: 2px solid #c6d4d1; /* Color pastel suave para el borde */
+}
+
+#timeDomainChart,
+#frequencyDomainChart {
+  border-radius: 15px; /* Bordes redondeados para los elementos canvas */
+  width: 100%;
+  height: 50%;
+}
