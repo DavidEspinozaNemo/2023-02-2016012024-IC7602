@@ -156,13 +156,13 @@ lock = threading.Lock()  # Para sincronizar el acceso a audio_data
 grabando = False  # Variable para controlar la grabación en tiempo real
 
 # Crear figuras para las gráficas en tiempo real
-fig_signal, ax_signal = plt.subplots(figsize=(8, 4))
+fig_signal, ax_signal = plt.subplots(figsize=(4, 2))
 canvas_signal = FigureCanvasTkAgg(fig_signal, master=ventana)
-canvas_signal.get_tk_widget().place(x=200, y=0)
+canvas_signal.get_tk_widget().place(x=500, y=110)
 
-fig_spectrum, ax_spectrum = plt.subplots(figsize=(8, 4))
+fig_spectrum, ax_spectrum = plt.subplots(figsize=(4, 2))
 canvas_spectrum = FigureCanvasTkAgg(fig_spectrum, master=ventana)
-canvas_spectrum.get_tk_widget().place(x=200, y=300)
+canvas_spectrum.get_tk_widget().place(x=10, y=110)
 
 # Función para inicializar la gráfica de la señal
 def init_signal():
