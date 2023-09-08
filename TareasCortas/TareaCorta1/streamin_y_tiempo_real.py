@@ -11,6 +11,42 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.animation import FuncAnimation
 import atm
 from scipy.fft import fft
+import struct 
+
+FRAMES = 1024*8
+FORMAT = pyaudio.paInt16
+CHANNELS = 1
+Fs = 44100
+
+p = pyaudio.PyAudio()
+
+stream = p.open(
+    format=FORMAT,
+    channels=CHANNELS,
+    rate=Fs,
+    input=True,
+    output=True,
+    frames_per_buffer=FRAMES
+)
+
+fig, (ax, ax1) = plt.subplots(2)
+
+x_audio = np.arange(0, FRAMES, 1)
+x_fft = np.linspace(0, Fs, FRAMES)
+
+line, = ax.plot(x_audio, np.random.rand(FRAMES), 'r')
+line_fft, = ax1.semilogx(x_fft, np.random.rand(FRAMES), 'b')
+
+ax.set_ylim(-32500, 32500)
+ax.set_xlim(0, FRAMES)
+
+Fmin = 1
+Fmax = 5000
+ax1.set_xlim(Fmin, Fmax)
+
+fig.show()
+
+F = (Fs/FRAMES)*np.arange(0, FRAMES//2)
 
 ventana = Tk()
 ventana.title('Grabadora Audio WAV')
@@ -222,10 +258,28 @@ def grabacion(FORMAT, CHANNELS, RATE, CHUNK, audio, archivo):
             data = stream.read(CHUNK)
             frames.append(data)
             
+            data = stream.read(FRAMES)
+            dataInt = struct.unpack(str(FRAMES) + 'h', data)
+            
+            line.set_ydata(dataInt)
+            
+            M_gk = abs(np.fft.fft(dataInt)/FRAMES)
+            
+            ax1.set_ylim(0, np.max(M_gk+10))
+            line_fft.set_ydata(M_gk)
+            
+            M_gk = M_gk[0:FRAMES//2]
+            Posm = np.where(M_gk == np.max(M_gk))
+            F_fund = F[Posm]
+            
+            fig.canvas.draw()
+            fig.canvas.flush_events()
+            
             # Captura los datos de audio en tiempo real para graficarlos
             audio_array = np.frombuffer(data, dtype=np.int16)
             with lock:
                 audio_data.extend(audio_array)
+                
 
         else:
             # Agregar algún tipo de pausa aquí, si deseas
