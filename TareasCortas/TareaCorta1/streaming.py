@@ -11,6 +11,7 @@ import pyaudio
 import os
 import wave
 import threading
+import atm
 
 #Esta función restablece los contadores de tiempo contador, contador1 y contador2.
 def clear_contador():
