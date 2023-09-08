@@ -16,7 +16,7 @@ wav_file = './TareasCortas/TareaCorta1/WavFiles/mixkit-fast-rocket-whoosh-1714.w
 wav_array, sample_rate = sf.read(wav_file)
 
 time = np.arange(0, len(wav_array)) / sample_rate
-
+'''
 plt.figure(figsize=(12, 6))
 
 # Subplot para el dominio del tiempo
@@ -86,4 +86,3 @@ sd.play(wav_array, sample_rate)
 
 # Mostrar la animación
 plt.show()
-'''
