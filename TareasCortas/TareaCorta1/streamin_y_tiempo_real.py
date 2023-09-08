@@ -283,6 +283,11 @@ def pausar():
         # Reanudar el proceso de cuenta cuando se reanuda la grabación
         cuenta()
 
+def salir():
+    ventana.quit()
+
+def guardarWAV():
+    ventana.quit()
 
 """configura la ventana de la GUI utilizando Tkinter, inicializa las variables necesarias, crea botones, etiquetas y 
    la visualización del directorio actual, y comienza el bucle de eventos principal con ventana.mainloop()"""
@@ -318,6 +323,14 @@ btnAbrir.place(x=366, y=71)
 # Boton para pausar
 btnPausar = Button(ventana, fg='blue', width=5, text='Pausar', command=pausar)
 btnPausar.place(x=190, y=71)
+
+#Boton para salir
+btnSalir = Button(ventana, width=5, text="Salir", command=salir)
+btnSalir.place(x=122, y=91)
+
+#Boton para salir
+btnGuardarWAV = Button(ventana, width=5, text="WAV", command=guardarWAV)
+btnGuardarWAV.place(x=244, y=91)
 
 etDir = Entry(ventana, width=77, bg="lavender", textvariable=directorio_actual)
 etDir.place(x=10, y=0)
