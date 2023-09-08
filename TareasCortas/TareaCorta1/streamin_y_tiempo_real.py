@@ -10,6 +10,7 @@ import scipy.fft
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.animation import FuncAnimation
 import atm
+from scipy.fft import fft
 
 ventana = Tk()
 ventana.title('Grabadora Audio WAV')
@@ -256,18 +257,18 @@ def grabacion(FORMAT, CHANNELS, RATE, CHUNK, audio, archivo):
     wf.writeframes(b''.join(frames))
     wf.close()
 
-    '''
-DATA EXAMPLE
+#DATA EXAMPLE
     #Save audio data in a dicctionary
+
+    fourier_data = fft(audio_data)
     data = {
-        "audioData" : audioData,
-        "fourierData" : fourierData,
-        "audioFrecuency" : audioFrecuency
+        "audioData" : audio_data,
+        "fourierData" : fourier_data,
+        "audioFrecuency" : RATE
     }
-'''
 
     #TODO: Implementar los datos y el fourier. Guardarlos en un diccionario.
-    atm.save("Dummy Data",archivo,os.getcwd(),nombreDeArchivo)
+    atm.save(data,archivo,os.getcwd(),nombreDeArchivo)
 
 
 
