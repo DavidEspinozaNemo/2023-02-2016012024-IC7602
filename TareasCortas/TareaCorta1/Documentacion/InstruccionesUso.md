@@ -5,13 +5,16 @@ Windows
 - Instalación de python 3.11 
 - Utilizar la consola para escribir el siguiente comando e instalar venv “python -m venv my_venv”
 - En la consola escribir el comando “ .venv/bin/activate” para abrir el entorno virtualInstalar las dependencias del ambiente con el comando “pip install -r ./requirements.txt”
-- Para usar la grabadora de voz correr el archivo con el comando “grabadora.py”
+- Para usar la grabadora de voz correr el archivo con el comando “python recorder.py”
   - Dentro de la grabadora se puede iniciar una grabación con el botón Iniciar.
-  - Detener la grabación con el botón parar. Esto crea el archivo atm de la grabación.
+  - Detener la grabación con el botón Guardar. Esto crea el archivo atm de la grabación.
   - Pausar la grabación con el botón pausar.
   - Las grabaciones quedan guardadas en el folder seleccionado con el explorador de archivos que se abre al tocar el botón de carpeta.
-- Para abrir el reproductor de archivos .atm correr el comando “python reproductor.py”
-- Esto inicia una página web que puede ser accedida ingresando a la dirección de localhost en el navegador web. Direccion: http://127.0.0.1:5000/
+  - Nota: Por limitaciones del código si la grabación dura mas de 15 segundos se detiene de forma automática, en este caso utilice el botón guardar para obtener la grabación.
+- Para abrir el reproductor de archivos .atm correr el comando “python player.py”
+- Esto inicia una página web que puede ser accedida ingresando a la dirección de localhost en el navegador web. Dirección: http://127.0.0.1:5000/
+  - Descomprimir el archivo .atm y escribir el la ubicación exacta del archivo .json en el espacio de texto de la interfaz.
+  - Usar el botón: Send Path
   - Esperar a que carguen los gráficos.
   - Usar play para reproducir el sonido. 
   - Usar rewind para moverse hacia atrás en el archivo.
