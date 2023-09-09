@@ -49,6 +49,11 @@ body {
   background-color: #aa5555;
 }
 
+.tool-bar .btn-send-file-path {
+  background-color: #aa5555;
+  color: #fff;
+}
+
 .time-domain-chart-wrapper,
 .frequency-domain-chart-wrapper {
   border-radius: 15px; /* Bordes redondeados para los contenedores de las gráficas */

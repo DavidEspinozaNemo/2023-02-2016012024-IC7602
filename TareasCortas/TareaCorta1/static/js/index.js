@@ -9,6 +9,7 @@ let frequencyChartInstance
 let intervalId
 let decodedData
 let isPlaying = false
+let isFilePathSet = false
 
 /**
  * Actualiza los gráficos en cada intervalo de tiempo
@@ -22,12 +23,13 @@ const updateGraphs = () => {
   }
 }
 
-fetch("/get_data")
-  .then((response) => response.json())
-  .then((jsonData) => {
-    data = jsonData
-    plotGraphs()
-  })
+//todo
+// fetch("/get_data")
+//   .then((response) => response.json())
+//   .then((jsonData) => {
+//     data = jsonData
+//     plotGraphs()
+//   })
 
 /**
  * Representa gráficamente los datos en el dominio del tiempo y la frecuencia
@@ -316,5 +318,39 @@ const resetAudio = () => {
   frequencyChartInstance.update()
 }
 
+// async function sendFilePathToServer() {
+const sendFilePathToServer = async () => {
+  const filePathInput = document.getElementById("filePathInput")
+  const filePath = filePathInput.value
+
+  if (!filePath) {
+    console.error("No file path provided")
+    return
+  }
+
+  try {
+    const response = await fetch("/set_file_path", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ filePath }),
+    })
+    console.log(response)
+    console.log("File path sent to the server")
+    isFilePathSet = true
+
+    if (response.ok) {
+      fetch("/get_data")
+        .then((response) => response.json())
+        .then((jsonData) => {
+          data = jsonData
+          plotGraphs()
+        })
+    }
+  } catch (error) {
+    console.error("Error sending file path:", error)
+  }
+}
 
 loadAudio()
