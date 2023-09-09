@@ -15,6 +15,8 @@ from scipy.fft import fft
 ventana = Tk()
 ventana.title('Grabadora Audio WAV')
 
+tiempo_transcurrido = 0
+
 # Esta función restablece los contadores de tiempo contador, contador1 y contador2.
 def clear_contador():
     global contador, contador1, contador2
@@ -43,6 +45,7 @@ def iniciar():
     global grabando
     global proceso
     global act_proceso
+    global tiempo_transcurrido
     clear_contador()
     audio = pyaudio.PyAudio()
     bloqueo('disabled')
@@ -147,7 +150,7 @@ def reproduce():
 def bloqueo(s):
     btnIniciar.config(state=s)
     btnDir.config(state=s)
-    btnAbrir.config(state=s)
+    #btnAbrir.config(state=s)
 
 """La función parar se llama cuando se presiona el botón "Parar". Detiene la grabación o la reproducción y restaura 
    la funcionalidad de los botones."""    
@@ -339,7 +342,7 @@ ventana.geometry("1000x500")
 # BOTONES 
 btnIniciar = Button(ventana, fg='blue', width=5, text='Grabar', command=iniciar)
 btnIniciar.place(x=122, y=71)
-btnParar = Button(ventana, fg='blue', width=5, text='Parar', command=parar)
+btnParar = Button(ventana, fg='blue', width=5, text='Guardar', command=parar)
 btnParar.place(x=244, y=71)
 btnDir = Button(ventana, text="Carpeta", width=5, command=direc)
 btnDir.place(x=0, y=71)

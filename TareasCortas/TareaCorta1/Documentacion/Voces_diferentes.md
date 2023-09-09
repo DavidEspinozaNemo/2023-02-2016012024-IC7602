@@ -28,4 +28,6 @@
 
 ​	La siguiente imagen es la vos de Ángel, junto a su Derivada de Fourier.
 
+![Gráficos de Ángel](C:\Users\david\OneDrive\Escritorio\2023-02-2016012024-IC7602\TareasCortas\TareaCorta1\Documentacion\grafico_angel.jpeg)
+
 ​	En resumen, la voz de cada individuo se grafica de manera diferente debido a la combinación de la naturaleza análoga de la voz humana, las diferencias en la anatomía vocal y las características individuales de la forma de hablar. Estas variaciones hacen que cada representación gráfica sea única y característica de cada persona.
