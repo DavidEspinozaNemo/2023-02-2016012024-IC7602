@@ -202,11 +202,14 @@ def init_spectrum():
 def update_spectrum(frame):
     ax_spectrum.clear()
     with lock:
-        audio_array = np.array(audio_data)
-        audio_spectrum = np.abs(scipy.fft.fft(audio_array))
-        audio_freqs = scipy.fft.fftfreq(len(audio_spectrum))
-        ax_spectrum.plot(audio_freqs, audio_spectrum, color='green')
+        if len(audio_data) > 0:
+            audio_array = np.array(audio_data)
+            audio_spectrum = np.abs(scipy.fft.fft(audio_array))
+            audio_freqs = scipy.fft.fftfreq(len(audio_spectrum))
+            ax_spectrum.plot(audio_freqs, audio_spectrum, color='green')
     return ax_spectrum,
+
+
 
 # Crear animaciones para las gráficas
 signal_animation = FuncAnimation(fig_signal, update_signal, init_func=init_signal, blit=True)
@@ -228,11 +231,12 @@ def grabacion(FORMAT, CHANNELS, RATE, CHUNK, audio, archivo):
                 audio_data.extend(audio_array)
                 
 
+
         else:
             # Agregar algún tipo de pausa aquí, si deseas
             pass
 
- 
+  
     # DETENEMOS GRABACIÓN
     stream.stop_stream()
     stream.close()

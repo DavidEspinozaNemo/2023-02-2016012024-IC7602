@@ -333,8 +333,10 @@ btnParar = Button(ventana, fg='blue', width=5, text='Parar', command=parar)
 btnParar.place(x=244, y=71)
 btnDir = Button(ventana, text="Carpeta", width=5, command=direc)
 btnDir.place(x=0, y=71)
+
 #btnAbrir = Button(ventana, text="Abrir", width=5, command=abrir)
 #btnAbrir.place(x=366, y=71)
+
 
 # Boton para pausar
 btnPausar = Button(ventana, fg='blue', width=5, text='Pausar', command=pausar)
@@ -347,6 +349,7 @@ btnSalir.place(x=366, y=71)
 #Boton para salir
 #btnGuardarWAV = Button(ventana, width=5, text="WAV", command=guardarWAV)
 #btnGuardarWAV.place(x=244, y=91)
+
 
 etDir = Entry(ventana, width=77, bg="lavender", textvariable=directorio_actual)
 etDir.place(x=10, y=0)
