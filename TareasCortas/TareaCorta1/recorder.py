@@ -27,6 +27,15 @@ def clear_contador():
 def dire():
     directorio_actual.set(os.getcwd())
 
+# Función para verificar si se ha alcanzado el límite de tiempo
+def verificar_tiempo_limite():
+    global tiempo_transcurrido
+    if tiempo_transcurrido >= 15:  # Cambiar el límite de tiempo según sea necesario
+        pausar()  # Llama a la función pausar si se alcanza el límite
+    else:
+        ventana.after(1000, verificar_tiempo_limite)  # Verifica nuevamente después de 1 segundo
+        tiempo_transcurrido += 1
+
 """La función iniciar se llama cuando se presiona el botón "Grabar". Configura el proceso de grabación de audio. Inicializa 
    un objeto PyAudio y establece grabando en True para indicar que la grabación está activa. También deshabilita los botones 
    mediante la función bloqueo y comienza varios hilos para manejar la grabación y el conteo de tiempo."""
@@ -38,6 +47,7 @@ def iniciar():
     audio = pyaudio.PyAudio()
     bloqueo('disabled')
     grabando = True
+    verificar_tiempo_limite()  # Inicia la verificación del tiempo límite
     FORMAT = pyaudio.paInt16
     CHANNELS = 2
     RATE = 44100
