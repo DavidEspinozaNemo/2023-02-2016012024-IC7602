@@ -1,3 +1,5 @@
 
 Proyecto0/chef-repo/cookbooks/asterisk_freepbx/mi-asterisk-cookbook/
 Proyecto0/chef-repo/cookbooks/asterisk_freepbx/asterisk-cookbook/
+.DS_Store
+.vscode/
