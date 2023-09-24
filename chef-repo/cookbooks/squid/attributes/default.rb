@@ -18,7 +18,7 @@
 #
 
 default['squid']['port'] = 3128
-default['squid']['network'] = nil
+default['squid']['network'] = '192.168.1.0/24'
 default['squid']['timeout'] = '10'
 default['squid']['opts'] = ''
 default['squid']['directives'] = []
