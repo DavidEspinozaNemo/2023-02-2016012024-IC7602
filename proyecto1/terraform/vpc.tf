@@ -23,7 +23,32 @@ resource "aws_route_table_association" "public" {
 }
 
 #==================NAT gateway===============================
-#todo: NAT here
+# Nat resource
+resource "aws_eip" "nat" {
+  domain = "vpc"
+}
+
+resource "aws_nat_gateway" "main" {
+  allocation_id = aws_eip.nat.id
+  subnet_id     = aws_subnet.public.id
+}
+
+# Luego la tabla de rutas para la subred privada que apunte hacia ese NAT Gateway
+resource "aws_route_table" "private" {
+  vpc_id = aws_vpc.main_vpc.id
+}
+
+resource "aws_route" "private_nat" {
+  route_table_id         = aws_route_table.private.id
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = aws_nat_gateway.main.id
+}
+
+resource "aws_route_table_association" "private" {
+  subnet_id      = aws_subnet.private.id
+  route_table_id = aws_route_table.private.id
+}
+
 
 #===================Public subnet===============================
 resource "aws_subnet" "public" {
