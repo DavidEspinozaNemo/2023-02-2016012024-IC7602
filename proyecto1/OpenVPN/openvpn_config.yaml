@@ -53,4 +53,23 @@ nombre_del_segmento: Configuración de OpenVPN
         dest: /etc/openvpn/server.conf
       when: inventory_hostname == "tu_servidor"
 
-    # Otras tareas aquí, como configurar reglas de firewall, etc.
+    - name: Definir reglas de firewall
+      set_fact:
+        firewall_rules:
+          - name: Allow SSH
+            protocol: tcp  # Aquí se define el protocolo para la regla SSH
+            port: 22
+            source_ip: 192.168.1.0/24
+            action: accept
+
+          - name: Allow HTTP
+            protocol: tcp  # Aquí se define el protocolo para la regla HTTP
+            port: 80
+            source_ip: 0.0.0.0/0
+            action: accept
+
+          - name: Deny FTP
+            protocol: tcp  # Aquí se define el protocolo para la regla FTP
+            port: 21
+            source_ip: 10.0.0.0/16
+            action: drop

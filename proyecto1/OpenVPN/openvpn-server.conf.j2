@@ -1,0 +1,64 @@
+# Archivo de configuración del servidor OpenVPN
+
+# Protocolo y puerto
+proto udp
+port 1194
+
+# Dirección local y máscara de red
+local 10.0.0.1
+server 10.0.0.0 255.255.255.0
+
+# Rutas de red a través del VPN
+push "route 10.0.1.0 255.255.255.0"
+
+# Clave y certificado del servidor
+ca /etc/openvpn/easy-rsa/pki/ca.crt
+cert /etc/openvpn/easy-rsa/pki/issued/server.crt
+key /etc/openvpn/easy-rsa/pki/private/server.key
+dh /etc/openvpn/easy-rsa/pki/dh.pem
+
+# Cifrado
+cipher AES-256-CBC
+
+# Autenticación
+auth SHA256
+
+# Opciones de cliente
+client-to-client
+keepalive 10 120
+comp-lzo
+
+# Registros de actividad
+log-append /var/log/openvpn/openvpn.log
+status /var/log/openvpn/openvpn-status.log
+
+# Configuración de DNS
+push "dhcp-option DNS 8.8.8.8"
+push "dhcp-option DNS 8.8.4.4"
+
+# Habilitar redireccionamiento de tráfico
+push "redirect-gateway def1 bypass-dhcp"
+
+# Seguridad y contexto de usuario
+user nobody
+group nogroup
+
+# Habilitar compresión
+comp-lzo
+
+# Deshabilitar compresión en ciertas rutas
+route-noexec
+
+# Habilitar persistencia de conexión
+persist-key
+persist-tun
+
+# Descomentar para habilitar compresión en conexiones de cliente
+;comp-lzo
+
+# Reglas de firewall (puede variar según tu configuración)
+# iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+# iptables -A FORWARD -s 10.0.0.0/24 -j ACCEPT
+# iptables -A FORWARD -j REJECT
+# iptables -t nat -A POSTROUTING -s 10.0.0.0/24 -o eth0 -j MASQUERADE
+
