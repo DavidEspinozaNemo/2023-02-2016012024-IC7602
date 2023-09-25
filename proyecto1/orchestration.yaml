@@ -1,0 +1,19 @@
+nombre_del_proyecto: Proyecto 1 - Redes
+integrantes:
+  - Angel
+  - David Espinoza 2016012024
+  - Fernando
+  - Sebastian
+  - Tania 
+descripcion_del_proyecto: |
+  Este proyecto tiene como objetivo 
+
+---
+- name: Orquestación General
+  hosts: servidores
+  tasks:
+    - name: Ejecutar Configuración de OpenVPN
+      import_playbook: openvpn_config.yaml
+
+    - name: Ejecutar Configuración de Otros Componentes
+      import_playbook: otros_componentes.yaml

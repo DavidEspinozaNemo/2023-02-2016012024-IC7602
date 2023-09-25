@@ -1,0 +1,56 @@
+nombre_del_segmento: Configuración de OpenVPN
+
+---
+- hosts: tu_servidor
+  become: yes  # Para ejecutar como usuario root
+  tasks:
+    - name: Actualizar el sistema
+      apt:
+        update_cache: yes
+        upgrade: yes
+
+    - name: Instalar OpenVPN y Easy-RSA
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - openvpn
+        - easy-rsa
+
+    - name: Copiar Easy-RSA a la ubicación correcta
+      command: cp -r /usr/share/easy-rsa/* /etc/openvpn/easy-rsa/
+      creates: /etc/openvpn/easy-rsa/easyrsa3
+
+    - name: Generar certificados y claves del servidor
+      command: >
+        /etc/openvpn/easy-rsa/easyrsa3/easyrsa
+        build-server-full servidor nopass
+      args:
+        chdir: /etc/openvpn/easy-rsa/easyrsa3/
+      environment:
+        EASYRSA_REQ_CN: servidor
+      when: inventory_hostname == "tu_servidor"
+
+    - name: Copiar certificados y claves al directorio correcto
+      command: cp /etc/openvpn/easy-rsa/easyrsa3/pki/issued/servidor.crt /etc/openvpn/
+      when: inventory_hostname == "tu_servidor"
+
+    - name: Copiar claves al directorio correcto
+      command: cp /etc/openvpn/easy-rsa/easyrsa3/pki/private/servidor.key /etc/openvpn/
+      when: inventory_hostname == "tu_servidor"
+
+    - name: Copiar archivo de CA
+      command: cp /etc/openvpn/easy-rsa/easyrsa3/pki/ca.crt /etc/openvpn/
+      when: inventory_hostname == "tu_servidor"
+
+    - name: Copiar archivo de Diffie-Hellman
+      command: cp /etc/openvpn/easy-rsa/easyrsa3/pki/dh.pem /etc/openvpn/
+      when: inventory_hostname == "tu_servidor"
+
+    - name: Configurar servidor OpenVPN
+      template:
+        src: openvpn-server.conf.j2
+        dest: /etc/openvpn/server.conf
+      when: inventory_hostname == "tu_servidor"
+
+    # Otras tareas aquí, como configurar reglas de firewall, etc.
