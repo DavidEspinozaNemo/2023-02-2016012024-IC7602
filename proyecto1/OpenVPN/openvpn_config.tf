@@ -6,14 +6,14 @@ provider "aws" {
 
 # Define una variable para el nombre de la instancia
 variable "instance_name" {
-  description = "Nombre de la instancia"
+  description = "Inst. OpenVPN"
   default     = "openvpn-instance"
 }
 
 # Crea una instancia EC2
 resource "aws_instance" "openvpn_instance" {
   ami           = "ami-007a18d38016a0f4e"  # AMI de Ubuntu (puedes cambiarla)
-  instance_type = "t3.medium"              # Tipo de instancia (ajústalo según tus necesidades)
+  instance_type = "t3.micro"               # Tipo de instancia (ajústalo según tus necesidades)
   tags = {
     Name = var.instance_name
   }
@@ -36,7 +36,7 @@ resource "null_resource" "install_openvpn" {
   connection {
     type        = "ssh"
     user        = "ubuntu"  # Usuario SSH en la instancia (puede variar según la AMI)
-    private_key = file("~/.ssh/your-private-key.pem")  # Ruta a tu clave privada SSH
+    private_key = file("~/.ssh/your-private-key.pem")  # Ruta a la clave privada SSH
     host        = aws_instance.openvpn_instance.public_ip  # IP pública de la instancia
   }
 
@@ -55,7 +55,26 @@ resource "aws_security_group" "openvpn_security_group" {
   name        = "openvpn-security-group"
   description = "Reglas de seguridad para OpenVPN"
   vpc_id      = aws_instance.openvpn_instance.vpc_security_group_ids[0]  # Obtén el ID del grupo de seguridad de la instancia
+}
 
-  # Define tus reglas de seguridad aquí (ejemplo: permitir tráfico en el puerto 1194, etc.)
-  # ...
+# Agrupamos varias reglas en un solo recurso aws_security_group_rule
+resource "aws_security_group_rule" "openvpn_rules" {
+  type        = "ingress"
+  security_group_id = aws_security_group.openvpn_security_group.id
+
+  rule {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["192.168.1.0/24"]
+  }
+
+  rule {
+    from_port   = 1194
+    to_port     = 1194
+    protocol    = "udp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # Puedes seguir agregando más reglas aquí según tus necesidades
 }
