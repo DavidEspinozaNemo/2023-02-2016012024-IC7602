@@ -1,6 +1,7 @@
 # Creación de una VPC en AWS
 resource "aws_vpc" "main_vpc" {
   cidr_block = "10.0.0.0/16"
+  enable_dns_hostnames = true
 }
 
 #===================Internet gateway===============================
@@ -18,10 +19,10 @@ resource "aws_route_table" "public" {
   # para permitir o restringir el tráfico hacia Internet.
   # Por defecto, no tiene rutas configuradas.
 
-  # route {
-  #   cidr_block = "0.0.0.0/0"
-  #   gateway_id = aws_internet_gateway.main_vpc.id
-  # }
+   route {
+     cidr_block = "0.0.0.0/0"
+     gateway_id = aws_internet_gateway.main_internet_gw.id
+   }
 }
 
 # Asociación de la tabla de rutas pública con una subred pública
@@ -67,6 +68,7 @@ resource "aws_route_table_association" "private" {
 resource "aws_subnet" "public" {
   vpc_id     = aws_vpc.main_vpc.id
   cidr_block = "10.0.0.0/22"
+  map_public_ip_on_launch = true
 }
 
 #===================Private subnet===============================
@@ -120,7 +122,7 @@ resource "aws_instance" "dns_server" {
 
 #===================Reverse Proxy (Subred Pública)===============================
 # Creación de una instancia para un servidor Reverse Proxy en una subred públicar
-esource "aws_instance" "reverse_proxy" {
+resource "aws_instance" "reverse_proxy" {
   ami                    = data.aws_ami.main_ami.id
   instance_type          = "t3.micro"
   subnet_id              = aws_subnet.public.id
