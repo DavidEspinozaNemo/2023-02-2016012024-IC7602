@@ -1,7 +1,6 @@
 # Creación de una VPC en AWS
 resource "aws_vpc" "main_vpc" {
   cidr_block = "10.0.0.0/16"
-  enable_dns_hostnames = true
 }
 
 #===================Internet gateway===============================
@@ -19,16 +18,22 @@ resource "aws_route_table" "public" {
   # para permitir o restringir el tráfico hacia Internet.
   # Por defecto, no tiene rutas configuradas.
 
-   route {
-     cidr_block = "0.0.0.0/0"
-     gateway_id = aws_internet_gateway.main_internet_gw.id
-   }
+  # route {
+  #   cidr_block = "0.0.0.0/0"
+  #   gateway_id = aws_internet_gateway.main_vpc.id
+  # }
 }
 
 # Asociación de la tabla de rutas pública con una subred pública
 resource "aws_route_table_association" "public" {
   subnet_id      = aws_subnet.public.id
   route_table_id = aws_route_table.public.id
+}
+
+resource "aws_route" "default_route" {
+  route_table_id         = aws_route_table.public.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.main_internet_gw.id
 }
 
 #==================NAT gateway===============================
@@ -78,34 +83,6 @@ resource "aws_subnet" "private" {
   cidr_block = "10.0.4.0/22"
 }
 
-#===================Public instance===============================
-# Creación de una instancia pública
-resource "aws_instance" "public_instance" {
-  ami                    = data.aws_ami.main_ami.id
-  instance_type          = "t3.micro"
-  subnet_id              = aws_subnet.public.id
-  vpc_security_group_ids = [aws_security_group.allow_traffic.id]
-  key_name               = aws_key_pair.main_auth.id
-
-  tags = {
-    Name = "Public instance"
-  }
-}
-
-#===================Private instance===============================
-# Creación de una instancia privada
-resource "aws_instance" "private_instance" {
-  ami                    = data.aws_ami.main_ami.id
-  instance_type          = "t3.micro"
-  subnet_id              = aws_subnet.private.id
-  vpc_security_group_ids = [aws_security_group.allow_traffic.id]
-  key_name               = aws_key_pair.main_auth.id
-
-  tags = {
-    Name = "Private instance"
-  }
-}
-
 #===================DNS Server (Subred Pública)===============================
 # Creación de una instancia para un servidor DNS en una subred pública
 resource "aws_instance" "dns_server" {
@@ -152,7 +129,7 @@ resource "aws_instance" "web_cache" {
 #  Creación de una instancia para un servidor Apache en una subred privada
 resource "aws_instance" "apache_server_1" {
   ami                    = data.aws_ami.main_ami.id
-  instance_type          = "t3.micro"
+  instance_type          = "t2.micro"
   subnet_id              = aws_subnet.private.id
   vpc_security_group_ids = [aws_security_group.allow_traffic.id]
   key_name               = aws_key_pair.main_auth.key_name
@@ -166,7 +143,7 @@ resource "aws_instance" "apache_server_1" {
 # Creación de otra instancia para un servidor Apache en una subred privada
 resource "aws_instance" "apache_server_2" {
   ami                    = data.aws_ami.main_ami.id
-  instance_type          = "t3.micro"
+  instance_type          = "t2.micro"
   subnet_id              = aws_subnet.private.id
   vpc_security_group_ids = [aws_security_group.allow_traffic.id]
   key_name               = aws_key_pair.main_auth.key_name
