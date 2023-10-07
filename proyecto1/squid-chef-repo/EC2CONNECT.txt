@@ -22,14 +22,14 @@ chef generate repo chef-repo
 
 #Guia 1
 #Conexion SSH
-ssh -i ~/.ssh/mainkey ubuntu@18.224.251.105
+ssh -i ~/.ssh/mainkey ubuntu@18.223.160.37
 #Descarga de Chef
 wget https://packages.chef.io/files/stable/chef-workstation/22.10.1013/ubuntu/20.04/chef-workstation_22.10.1013-1_amd64.deb
 sudo dpkg -i chef-workstation_*.deb
 
 #Guia 2
-scp -i ~/.ssh/mainkey -r F:\GitHub\2023-02-2016012024-IC7602\proyecto1\squid-chef-repo ubuntu@18.118.5.126:
-ssh -i ~/.ssh/mainkey ubuntu@18.118.5.126
+scp -i ~/.ssh/mainkey -r F:\GitHub\2023-02-2016012024-IC7602\proyecto1\squid-chef-repo ubuntu@18.223.160.37:
+ssh -i ~/.ssh/mainkey ubuntu@18.223.160.37
 wget https://packages.chef.io/files/stable/chef-workstation/22.10.1013/ubuntu/20.04/chef-workstation_22.10.1013-1_amd64.deb
 sudo dpkg -i chef-workstation_*.deb
 cd squid-chef-repo/
