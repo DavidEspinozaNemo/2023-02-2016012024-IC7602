@@ -1,0 +1,36 @@
+ssh -i ~/.ssh/mainkey ubuntu@18.224.251.105
+# scp -i ~/.ssh/mainkey -r F:\GitHub\2023-02-2016012024-IC7602\proyecto1\squid-chef-repo ubuntu@18.224.251.105:
+
+wget https://packages.chef.io/files/stable/chef-server/15.1.7/ubuntu/20.04/chef-server-core_15.1.7-1_amd64.deb
+sudo dpkg -i chef-server-core_*.deb
+
+wget https://packages.chef.io/files/stable/chef-workstation/22.10.1013/ubuntu/20.04/chef-workstation_22.10.1013-1_amd64.deb
+sudo dpkg -i chef-workstation_*.deb
+
+cd squid-chef-repo/
+sudo chef-solo  -c solo.rb -j node.json (PONER EL YES AUTOMATICO)
+
+#Download cookbook
+knife supermarket download squid
+sudo tar -xf squid-5.1.5.tar.gz
+
+
+chef generate repo chef-repo
+
+"192.168.1.0/24"
+
+
+#Guia 1
+#Conexion SSH
+ssh -i ~/.ssh/mainkey ubuntu@18.224.251.105
+#Descarga de Chef
+wget https://packages.chef.io/files/stable/chef-workstation/22.10.1013/ubuntu/20.04/chef-workstation_22.10.1013-1_amd64.deb
+sudo dpkg -i chef-workstation_*.deb
+
+#Guia 2
+scp -i ~/.ssh/mainkey -r F:\GitHub\2023-02-2016012024-IC7602\proyecto1\squid-chef-repo ubuntu@18.118.5.126:
+ssh -i ~/.ssh/mainkey ubuntu@18.118.5.126
+wget https://packages.chef.io/files/stable/chef-workstation/22.10.1013/ubuntu/20.04/chef-workstation_22.10.1013-1_amd64.deb
+sudo dpkg -i chef-workstation_*.deb
+cd squid-chef-repo/
+sudo chef-solo  -c solo.rb -j node.json (PONER EL YES AUTOMATICO)
