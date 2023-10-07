@@ -30,6 +30,33 @@ resource "null_resource" "install_openvpn" {
 }
 
 # una vez instalado en la instancia, se deben realizar configuraciones
+
+# Creacion de los certificados
+resource "null_resource" "install_openvpn" {
+  # Dependencia en la instancia EC2 para garantizar que se ejecute después de su creación
+  depends_on = [aws_instance.openvpn_instance]
+
+  # Generar certificados y claves de OpenVPN
+  provisioner "file" {
+    source      = "./generate_openvpn_keys.sh"  # Ruta local del script de generación de claves
+    destination = "/tmp/generate_openvpn_keys.sh"  # Ruta en la instancia EC2
+    connection {
+      type        = "ssh"
+      user        = "ubuntu"  # Usuario SSH en la instancia (ajústalo según tu caso)
+      private_key = file("~/.ssh/your-private-key.pem")  # Ruta a la clave privada SSH
+      host        = aws_instance.openvpn_instance.public_ip  # IP pública de la instancia
+    }
+  }
+
+  # Ejecutar el script de generación de claves
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/generate_openvpn_keys.sh",  # Cambia los permisos del script para que sea ejecutable
+      "/tmp/generate_openvpn_keys.sh"  # Ejecuta el script de generación de claves
+    ]
+  }
+}
+
 # Recurso null_resource para copiar el archivo server.conf y reiniciar OpenVPN
 resource "null_resource" "configure_openvpn" {
   # Dependencia en la instancia EC2 de OpenVPN para garantizar que se ejecute después de su creación
