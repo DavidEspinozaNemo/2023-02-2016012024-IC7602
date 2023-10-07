@@ -34,3 +34,37 @@ wget https://packages.chef.io/files/stable/chef-workstation/22.10.1013/ubuntu/20
 sudo dpkg -i chef-workstation_*.deb
 cd squid-chef-repo/
 sudo chef-solo  -c solo.rb -j node.json (PONER EL YES AUTOMATICO)
+
+#Enviar archivos
+scp -i ~/.ssh/mainkey -r F:\GitHub\2023-02-2016012024-IC7602\proyecto1\reverse-proxy-chef-repo ubuntu@3.15.213.65:
+
+#Traer archivos
+scp -i ~/.ssh/mainkey -r ubuntu@3.15.213.65:/home/ubuntu/apache2-chef-repo F:\GitHub\2023-02-2016012024-IC7602\proyecto1\
+
+#Descomprimir
+sudo tar -xf 
+
+#Traer un cookbook 
+knife supermarket download apache2
+
+
+#Instalacion en EC2 de squid
+scp -i ~/.ssh/mainkey -r F:\GitHub\2023-02-2016012024-IC7602\proyecto1\squid-chef-repo ubuntu@[IPPublic]:
+wget https://packages.chef.io/files/stable/chef-workstation/22.10.1013/ubuntu/20.04/chef-workstation_22.10.1013-1_amd64.deb
+sudo dpkg -i chef-workstation_*.deb
+cd squid-chef-repo/
+sudo chef-solo  -c solo.rb -j node.json
+
+#Instalcion en EC2 de WebServer 1
+scp -i ~/.ssh/mainkey -r F:\GitHub\2023-02-2016012024-IC7602\proyecto1\apache2-chef-repo-1 ubuntu@[IPPublic]:
+wget https://packages.chef.io/files/stable/chef-workstation/22.10.1013/ubuntu/20.04/chef-workstation_22.10.1013-1_amd64.deb
+sudo dpkg -i chef-workstation_*.deb
+cd squid-chef-repo/
+sudo chef-solo  -c solo.rb -j node.json
+
+#Instalcion en EC2 de WebServer 2
+scp -i ~/.ssh/mainkey -r F:\GitHub\2023-02-2016012024-IC7602\proyecto1\apache2-chef-repo-2 ubuntu@[IPPublic]:
+wget https://packages.chef.io/files/stable/chef-workstation/22.10.1013/ubuntu/20.04/chef-workstation_22.10.1013-1_amd64.deb
+sudo dpkg -i chef-workstation_*.deb
+cd squid-chef-repo/
+sudo chef-solo  -c solo.rb -j node.json
