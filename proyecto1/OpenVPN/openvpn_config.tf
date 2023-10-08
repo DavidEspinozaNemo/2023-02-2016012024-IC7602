@@ -16,7 +16,7 @@ resource "null_resource" "install_openvpn" {
   connection {
     type        = "ssh"
     user        = "ubuntu"  # Usuario SSH en la instancia (puede variar según la AMI)
-    private_key = file("~/.ssh/your-private-key.pem")  # Ruta a la clave privada SSH
+    private_key = file("~/.ssh/mainkey")  # Ruta a la clave privada SSH
     host        = aws_instance.openvpn_instance.public_ip  # IP pública de la instancia
   }
 
@@ -29,9 +29,9 @@ resource "null_resource" "install_openvpn" {
   }
 }
 
-# una vez instalado en la instancia, se deben realizar configuraciones
+# Una vez instalado en la instancia, se deben realizar configuraciones
 
-# Creacion de los certificados
+# Recurso null_resource para creacion de los certificados
 resource "null_resource" "install_openvpn" {
   # Dependencia en la instancia EC2 para garantizar que se ejecute después de su creación
   depends_on = [aws_instance.openvpn_instance]
@@ -43,7 +43,7 @@ resource "null_resource" "install_openvpn" {
     connection {
       type        = "ssh"
       user        = "ubuntu"  # Usuario SSH en la instancia (ajústalo según tu caso)
-      private_key = file("~/.ssh/your-private-key.pem")  # Ruta a la clave privada SSH
+      private_key = file("~/.ssh/mainkey")  # Ruta a la clave privada SSH
       host        = aws_instance.openvpn_instance.public_ip  # IP pública de la instancia
     }
   }
@@ -52,7 +52,7 @@ resource "null_resource" "install_openvpn" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/generate_openvpn_keys.sh",  # Cambia los permisos del script para que sea ejecutable
-      "/tmp/generate_openvpn_keys.sh"  # Ejecuta el script de generación de claves
+      "./generate_openvpn_keys.sh"  # Ejecuta el script de generación de claves
     ]
   }
 }
@@ -69,7 +69,7 @@ resource "null_resource" "configure_openvpn" {
     connection {
       type        = "ssh"
       user        = "ubuntu"  # Usuario SSH en la instancia (ajústalo según tu caso)
-      private_key = file("~/.ssh/your-private-key.pem")  # Ruta a la clave privada SSH
+      private_key = file("~/.ssh/mainkey")  # Ruta a la clave privada SSH
       host        = aws_instance.openvpn_instance.public_ip  # IP pública de la instancia
     }
   }
@@ -82,7 +82,7 @@ resource "null_resource" "configure_openvpn" {
     connection {
       type        = "ssh"
       user        = "ubuntu"  # Usuario SSH en la instancia (ajústalo según tu caso)
-      private_key = file("~/.ssh/your-private-key.pem")  # Ruta a la clave privada SSH
+      private_key = file("~/.ssh/mainkey")  # Ruta a la clave privada SSH
       host        = aws_instance.openvpn_instance.public_ip  # IP pública de la instancia
     }
   }
