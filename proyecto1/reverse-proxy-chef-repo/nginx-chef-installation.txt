@@ -1,0 +1,10 @@
+---- Create a chef repo and get nginx from supermarket ----
+
+chef generate repo chef-repo-name
+cd chef-repo-name/
+knife supermarket download nginx
+cd cookbooks/
+tar xvf ../nginx-12.2.5.tar
+
+---- Create a recipe to update the default settings ----
+

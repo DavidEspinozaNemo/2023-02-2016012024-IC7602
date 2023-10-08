@@ -1,0 +1,43 @@
+{
+  "name": "squid",
+  "description": "Installs/configures squid as a simple caching proxy",
+  "long_description": "",
+  "maintainer": "Sous Chefs",
+  "maintainer_email": "help@sous-chefs.org",
+  "license": "Apache-2.0",
+  "platforms": {
+    "debian": ">= 0.0.0",
+    "ubuntu": ">= 0.0.0",
+    "centos": ">= 0.0.0",
+    "redhat": ">= 0.0.0",
+    "scientific": ">= 0.0.0",
+    "suse": ">= 0.0.0",
+    "amazon": ">= 0.0.0",
+    "freebsd": ">= 0.0.0"
+  },
+  "dependencies": {
+
+  },
+  "providing": {
+
+  },
+  "recipes": {
+
+  },
+  "version": "5.1.3",
+  "source_url": "https://github.com/sous-chefs/squid",
+  "issues_url": "https://github.com/sous-chefs/squid/issues",
+  "privacy": false,
+  "chef_versions": [
+    [
+      ">= 13"
+    ]
+  ],
+  "ohai_versions": [
+
+  ],
+  "gems": [
+
+  ],
+  "eager_load_libraries": true
+}
