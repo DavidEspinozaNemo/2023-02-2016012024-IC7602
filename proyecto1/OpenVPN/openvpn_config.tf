@@ -32,7 +32,7 @@ resource "null_resource" "install_openvpn" {
 # Una vez instalado en la instancia, se deben realizar configuraciones
 
 # Recurso null_resource para creacion de los certificados
-resource "null_resource" "install_openvpn" {
+resource "null_resource" "install_openvpn_certificados" {
   # Dependencia en la instancia EC2 para garantizar que se ejecute después de su creación
   depends_on = [aws_instance.openvpn_instance]
 
@@ -58,7 +58,7 @@ resource "null_resource" "install_openvpn" {
 }
 
 # Recurso null_resource para copiar el archivo server.conf y reiniciar OpenVPN
-resource "null_resource" "configure_openvpn" {
+resource "null_resource" "configure_openvpn_configuracion" {
   # Dependencia en la instancia EC2 de OpenVPN para garantizar que se ejecute después de su creación
   depends_on = [aws_instance.openvpn_instance]
 
