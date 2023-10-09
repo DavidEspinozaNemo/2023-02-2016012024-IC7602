@@ -1,12 +1,31 @@
 # Creación de una VPC en AWS
 resource "aws_vpc" "main_vpc" {
   cidr_block = "10.0.0.0/16"
+
+  tags = {
+    Name = "Main VPC"
+  }
 }
 
 #===================Internet gateway===============================
 # Creación de un Internet Gateway para habilitar la conectividad a Internet
 resource "aws_internet_gateway" "main_internet_gw" {
   vpc_id = aws_vpc.main_vpc.id
+}
+
+#===================Public subnet===============================
+# Creación de una subred pública en la VPC
+resource "aws_subnet" "public" {
+  vpc_id     = aws_vpc.main_vpc.id
+  cidr_block = "10.0.0.0/22"
+  map_public_ip_on_launch = true
+}
+
+#===================Private subnet===============================
+# Creación de una subred privada en la VPC
+resource "aws_subnet" "private" {
+  vpc_id     = aws_vpc.main_vpc.id
+  cidr_block = "10.0.4.0/22"
 }
 
 #===================Public route table===============================
@@ -28,6 +47,12 @@ resource "aws_route_table" "public" {
 resource "aws_route_table_association" "public" {
   subnet_id      = aws_subnet.public.id
   route_table_id = aws_route_table.public.id
+}
+
+resource "aws_route" "default_route" {
+  route_table_id         = aws_route_table.public.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.main_internet_gw.id
 }
 
 #==================NAT gateway===============================
@@ -61,46 +86,26 @@ resource "aws_route_table_association" "private" {
   route_table_id = aws_route_table.private.id
 }
 
-
-#===================Public subnet===============================
-# Creación de una subred pública en la VPC
-resource "aws_subnet" "public" {
-  vpc_id     = aws_vpc.main_vpc.id
-  cidr_block = "10.0.0.0/22"
-}
-
-#===================Private subnet===============================
-# Creación de una subred privada en la VPC
-resource "aws_subnet" "private" {
-  vpc_id     = aws_vpc.main_vpc.id
-  cidr_block = "10.0.4.0/22"
-}
-
-#===================Public instance===============================
-# Creación de una instancia pública
-resource "aws_instance" "public_instance" {
+resource "aws_instance" "vpn_server" {
   ami                    = data.aws_ami.main_ami.id
-  instance_type          = "t3.micro"
+  instance_type          = "t2.micro"
   subnet_id              = aws_subnet.public.id
   vpc_security_group_ids = [aws_security_group.allow_traffic.id]
-  key_name               = aws_key_pair.main_auth.id
+  key_name               = aws_key_pair.main_auth.key_name
 
   tags = {
-    Name = "Public instance"
+    Name = "VPN Server"
   }
 }
-
-#===================Private instance===============================
-# Creación de una instancia privada
-resource "aws_instance" "private_instance" {
+resource "aws_instance" "bastion_host" {
   ami                    = data.aws_ami.main_ami.id
-  instance_type          = "t3.micro"
-  subnet_id              = aws_subnet.private.id
+  instance_type          = "t2.micro"
+  subnet_id              = aws_subnet.public.id
   vpc_security_group_ids = [aws_security_group.allow_traffic.id]
-  key_name               = aws_key_pair.main_auth.id
+  key_name               = aws_key_pair.main_auth.key_name
 
   tags = {
-    Name = "Private instance"
+    Name = "Bastion host"
   }
 }
 
@@ -108,7 +113,7 @@ resource "aws_instance" "private_instance" {
 # Creación de una instancia para un servidor DNS en una subred pública
 resource "aws_instance" "dns_server" {
   ami                    = data.aws_ami.main_ami.id
-  instance_type          = "t3.micro"
+  instance_type          = "t2.micro"
   subnet_id              = aws_subnet.public.id
   vpc_security_group_ids = [aws_security_group.allow_traffic.id]
   key_name               = aws_key_pair.main_auth.key_name
@@ -120,9 +125,9 @@ resource "aws_instance" "dns_server" {
 
 #===================Reverse Proxy (Subred Pública)===============================
 # Creación de una instancia para un servidor Reverse Proxy en una subred públicar
-esource "aws_instance" "reverse_proxy" {
+resource "aws_instance" "reverse_proxy" {
   ami                    = data.aws_ami.main_ami.id
-  instance_type          = "t3.micro"
+  instance_type          = "t2.micro"
   subnet_id              = aws_subnet.public.id
   vpc_security_group_ids = [aws_security_group.allow_traffic.id]
   key_name               = aws_key_pair.main_auth.key_name
@@ -136,7 +141,7 @@ esource "aws_instance" "reverse_proxy" {
 # Creación de una instancia para un servidor Web Cache en una subred pública
 resource "aws_instance" "web_cache" {
   ami                    = data.aws_ami.main_ami.id
-  instance_type          = "t3.micro"
+  instance_type          = "t2.micro"
   subnet_id              = aws_subnet.public.id
   vpc_security_group_ids = [aws_security_group.allow_traffic.id]
   key_name               = aws_key_pair.main_auth.key_name
@@ -150,7 +155,7 @@ resource "aws_instance" "web_cache" {
 #  Creación de una instancia para un servidor Apache en una subred privada
 resource "aws_instance" "apache_server_1" {
   ami                    = data.aws_ami.main_ami.id
-  instance_type          = "t3.micro"
+  instance_type          = "t2.micro"
   subnet_id              = aws_subnet.private.id
   vpc_security_group_ids = [aws_security_group.allow_traffic.id]
   key_name               = aws_key_pair.main_auth.key_name
@@ -164,7 +169,7 @@ resource "aws_instance" "apache_server_1" {
 # Creación de otra instancia para un servidor Apache en una subred privada
 resource "aws_instance" "apache_server_2" {
   ami                    = data.aws_ami.main_ami.id
-  instance_type          = "t3.micro"
+  instance_type          = "t2.micro"
   subnet_id              = aws_subnet.private.id
   vpc_security_group_ids = [aws_security_group.allow_traffic.id]
   key_name               = aws_key_pair.main_auth.key_name
@@ -173,7 +178,6 @@ resource "aws_instance" "apache_server_2" {
     Name = "Apache Server 2"
   }
 }
-
 
 #=================== Security Group===============================
 # Creación de un grupo de seguridad para permitir el tráfico necesario
@@ -223,6 +227,12 @@ resource "aws_security_group" "allow_traffic" {
   ingress {
     from_port   = 53
     to_port     = 53
+    protocol    = "udp"
+    cidr_blocks = ["0.0.0.0/0"] 
+  }
+  ingress {
+    from_port   = 1194
+    to_port     = 1194
     protocol    = "udp"
     cidr_blocks = ["0.0.0.0/0"] 
   }
