@@ -10,7 +10,7 @@ Estudiante: David José Espinoza Soto
 
 **Pregunta 1:** _Sobre la estación “Deep Space 13”, en Solaria, la compañía Lucky Starr Tech nos contrata para realizar una propuesta de la capa física que se utilizaría para garantizar las comunicaciones en todo Namiapí, la zona de colonización._
 
-![imagen de la colonizacion de Solaria](..\RedeSolaria.png)
+![imagen de la colonizacion de Solaria](https://github.com/DavidEspinozaNemo/2023-02-2016012024-IC7602/blob/main/Resumenes/RedeSolaria.png)
 
 Mi propuesta iría por usar pequeños dispositivos de comunicación, celulares del futuro, para establecer una red de comunicación. Hiendo de lo general a lo específico, la comunicación en Solaria iría de la Tierra (o alguna base de la Tierra) a la estación “Deep Space 13”, luego de la estación al enjambre de satélites en la órbita geoestacionaria (estos satélites recibirán y reenviarán paquetes), luego de un satélite a una torre de comunicaciones en Namiapí, y de dicha torre al dispositivo destinado que puede ser una base de operaciones o un dispositivo personal, así y viceversa.
 
